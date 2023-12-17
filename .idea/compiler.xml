@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="BlossomRPC-Server" />
+        <module name="BlossomRPC-Client" />
+        <module name="BlossomRPC-Core" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="BlossomRPC" target="19" />
+      <module name="BlossomRPC-Client" target="19" />
+      <module name="BlossomRPC-Core" target="19" />
+      <module name="BlossomRPC-Server" target="19" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

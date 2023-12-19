@@ -29,7 +29,9 @@ public class RpcRequest implements Serializable {
     private String methodName;
     //请求参数
     private Object[] params;
-    //参数类型
+
+    //参数类型method.getParameterTypes()返回什么就用什么类型
+    //考虑到要用反射
     private Class<?>[] paramsTypes;
 }
 

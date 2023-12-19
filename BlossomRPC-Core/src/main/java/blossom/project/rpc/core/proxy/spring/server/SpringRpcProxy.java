@@ -1,4 +1,4 @@
-package blossom.project.rpc.core.proxy.spring;
+package blossom.project.rpc.core.proxy.spring.server;
 
 import blossom.project.rpc.core.entity.RpcRequest;
 import org.springframework.stereotype.Component;
@@ -16,6 +16,7 @@ import java.lang.reflect.Method;
  * SpringRpcProxy类
  */
 @Component
+//@Deprecated
 public class SpringRpcProxy {
     /**
      * 反射方法调用

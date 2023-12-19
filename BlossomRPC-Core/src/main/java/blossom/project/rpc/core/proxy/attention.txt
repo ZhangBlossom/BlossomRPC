@@ -2,3 +2,5 @@
 只是我的测试代码而已。
 我只是为了测试可以用这几种方法去实现代理。
 而真正的代理生效
+
+参考文献：https://grpc.io/docs/languages/java/basics/#defining-the-service

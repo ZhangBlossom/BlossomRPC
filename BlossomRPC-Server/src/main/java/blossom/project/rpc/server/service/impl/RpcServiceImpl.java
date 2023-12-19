@@ -1,5 +1,6 @@
 package blossom.project.rpc.server.service.impl;
 
+import blossom.project.rpc.core.proxy.spring.annotation.RpcServiceDeclaration;
 import blossom.project.rpc.core.service.RpcService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -15,7 +16,8 @@ import org.springframework.stereotype.Service;
  * 远程被调用的服务的具体实现
  */
 @Slf4j
-@Service
+//@Service
+@RpcServiceDeclaration
 public class RpcServiceImpl implements RpcService {
 
     /**

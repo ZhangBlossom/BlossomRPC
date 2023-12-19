@@ -1,4 +1,4 @@
-package blossom.project.rpc.core.proxy.spring;
+package blossom.project.rpc.core.proxy.spring.server;
 
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
@@ -13,8 +13,10 @@ import org.springframework.stereotype.Component;
  * @github: https://github.com/ZhangBlossom
  * SpringBeanManager类
  * 通用工具类，用于从Spring容器中获取制定Bean
+ *
  */
 @Component
+//@Deprecated
 public class SpringBeanManager implements ApplicationContextAware {
 
     private static ApplicationContext applicationContext;

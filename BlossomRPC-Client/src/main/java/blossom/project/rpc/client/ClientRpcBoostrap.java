@@ -1,6 +1,6 @@
 package blossom.project.rpc.client;
 
-import blossom.project.rpc.client.proxy.RpcClientProxyFactory;
+import blossom.project.rpc.core.proxy.spring.client.RpcClientProxyFactory;
 import blossom.project.rpc.core.service.RpcService;
 
 /**
@@ -19,7 +19,7 @@ public class ClientRpcBoostrap {
 
         RpcClientProxyFactory proxy = new RpcClientProxyFactory();
         RpcService clientProxy = proxy.getClientProxy
-                (RpcService.class, "127.0.0.1", 8080);
+                (RpcService.class, "192.168.2.6", 8080);
         System.out.println(clientProxy.testRpcRequest("hello"));
 
 

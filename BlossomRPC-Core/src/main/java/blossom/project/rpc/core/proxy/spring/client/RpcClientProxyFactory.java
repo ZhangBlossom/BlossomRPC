@@ -1,4 +1,4 @@
-package blossom.project.rpc.client.proxy;
+package blossom.project.rpc.core.proxy.spring.client;
 
 import java.lang.reflect.Proxy;
 

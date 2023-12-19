@@ -1,4 +1,4 @@
-package blossom.project.rpc.client.proxy;
+package blossom.project.rpc.core.proxy.spring.client;
 
 import blossom.project.rpc.core.constants.RpcCommonConstants;
 import blossom.project.rpc.core.entity.*;

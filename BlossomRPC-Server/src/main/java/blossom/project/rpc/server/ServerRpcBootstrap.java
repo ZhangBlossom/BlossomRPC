@@ -1,9 +1,8 @@
 package blossom.project.rpc.server;
 
 import blossom.project.rpc.core.entity.RpcRequest;
-import blossom.project.rpc.core.proxy.spring.SpringBeanManager;
-import blossom.project.rpc.core.proxy.spring.SpringRpcProxy;
-import blossom.project.rpc.core.starter.NettyRpcServer;
+import blossom.project.rpc.core.proxy.spring.server.SpringBeanManager;
+import blossom.project.rpc.core.proxy.spring.server.SpringRpcProxy;
 import blossom.project.rpc.server.service.impl.RpcServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.SpringApplication;
@@ -28,6 +27,8 @@ import java.util.Objects;
 public class ServerRpcBootstrap {
     public static void main(String[] args) {
         ConfigurableApplicationContext context = SpringApplication.run(ServerRpcBootstrap.class, args);
+
+        //下面的所有代码其实都不需要 做校验用的而已
         SpringBeanManager bean = context.getBean(SpringBeanManager.class);
         RpcServiceImpl service = context.getBean(RpcServiceImpl.class);
         SpringRpcProxy rpcProxy = context.getBean(SpringRpcProxy.class);
@@ -57,7 +58,9 @@ public class ServerRpcBootstrap {
         //如果不用spring啥事情没有
 
         //正式启动RPC Server
-        new NettyRpcServer("127.0.0.1",8080).start();
+        //TODO 考虑整合Spring之后使用InitialBean来进行初始化
+        //TODO 考虑注册中心的实现
+        //new NettyRpcServer("127.0.0.1",8080).start();
 
         log.info("Server startup successfully!!!");
     }

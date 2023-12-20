@@ -45,7 +45,7 @@ public class ServerRpcBootstrap {
             //这里我简单的用Map模拟了一个注册中心
             request.setClassName("blossom.project.rpc.core.service.RpcService");
             request.setMethodName("testRpcRequest");
-            request.setParams(new Object[]{"hello!!!testRpcRequest!!!"});
+            request.setParams(new Object[]{"Test the Server Successfully..."});
             request.setParamsTypes(new Class<?>[]{String.class});
             Object data = rpcProxy.invoke(request);
             System.out.println(data);

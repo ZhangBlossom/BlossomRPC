@@ -15,4 +15,12 @@ public interface RpcCommonConstants {
 
     //请求头长度
     int HEADER_LENGTH = 15;
+    /**
+     * nacos 默认分组名称
+     */
+    String DEFAULT_GROUP = "DEFAULT_GROUP";
+    /**
+     * nacos默认名称中心
+     */
+    String namespace = "public";
 }

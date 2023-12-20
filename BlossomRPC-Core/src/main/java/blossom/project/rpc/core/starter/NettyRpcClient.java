@@ -3,6 +3,7 @@ package blossom.project.rpc.core.starter;
 import blossom.project.rpc.core.entity.RpcDto;
 import blossom.project.rpc.core.entity.RpcRequest;
 import blossom.project.rpc.core.handler.NettyRpcClientInitializer;
+import blossom.project.rpc.core.register.RegisterService;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelFutureListener;
@@ -49,7 +50,7 @@ public class NettyRpcClient {
      * @param requestRpcDto
      * @throws InterruptedException
      */
-    public void doRequest(RpcDto<RpcRequest> requestRpcDto) {
+    public void doRequest(RpcDto<RpcRequest> requestRpcDto, RegisterService registerService) {
         final ChannelFuture future;
         try {
             // 连接到服务器。这里使用了bootstrap对象（预先配置好的客户端启动器）来建立连接。

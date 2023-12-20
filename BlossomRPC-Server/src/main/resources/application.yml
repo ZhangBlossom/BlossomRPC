@@ -2,3 +2,4 @@ blossom:
   rpc:
     serviceAddress: 127.0.0.1
     servicePort: 8080
+    registerAddress: localhost:8848

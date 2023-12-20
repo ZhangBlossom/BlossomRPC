@@ -4,6 +4,7 @@ import blossom.project.rpc.core.constants.RpcCommonConstants;
 import blossom.project.rpc.core.entity.*;
 import blossom.project.rpc.core.enums.AlgorithmTypeEnum;
 import blossom.project.rpc.core.enums.ReqTypeEnum;
+import blossom.project.rpc.core.register.RegisterService;
 import blossom.project.rpc.core.starter.NettyRpcClient;
 import io.netty.channel.DefaultEventLoop;
 import io.netty.util.concurrent.DefaultPromise;
@@ -43,6 +44,11 @@ public class JdkRpcProxyInvocationHandler implements InvocationHandler {
         this.port = port;
     }
 
+    private RegisterService registerService;
+
+    public JdkRpcProxyInvocationHandler(RegisterService registerService){
+        this.registerService = registerService;
+    }
 
     /**
      *
@@ -76,7 +82,7 @@ public class JdkRpcProxyInvocationHandler implements InvocationHandler {
         //那么此时promise的get的阻塞就会结束
         DefaultPromise<RpcResponse> promise = new DefaultPromise(new DefaultEventLoop());
         RpcCache.RESPONSE_CACHE.put(reqId,promise);
-        nettyClient.doRequest(dto);
+        nettyClient.doRequest(dto,registerService);
         //TODO 方便debug time：2023/12/16 01：14
         Object data = promise.get().getData();
         return data;

@@ -3,6 +3,8 @@ package blossom.project.rpc.core.proxy.spring.server;
 import blossom.project.rpc.core.proxy.spring.annotation.RpcServiceDeclaration;
 import blossom.project.rpc.core.proxy.spring.rpcmethod.RpcServiceMethod;
 import blossom.project.rpc.core.proxy.spring.rpcmethod.RpcServiceMethodCache;
+import blossom.project.rpc.core.register.RegisterService;
+import blossom.project.rpc.core.register.RpcServiceInstance;
 import blossom.project.rpc.core.starter.NettyRpcServer;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeansException;
@@ -25,20 +27,18 @@ import java.net.UnknownHostException;
  * 2：当前类得考虑将IOC容器中的所有被特定注解管理的方法注册到注册中心去
  */
 @Slf4j
-public class SpringRpcProcessor implements InitializingBean,BeanPostProcessor {
+public class SpringRpcServiceDeclarationProcessor implements InitializingBean,BeanPostProcessor {
     private final String serverAddress;
     private final int serverPort;
 
-    public SpringRpcProcessor(int serverPort) throws UnknownHostException {
-        //this.serverPort= serverPort;
-        //this.registryService=registryService;
+    private final RegisterService registerService;
 
+    public SpringRpcServiceDeclarationProcessor(int serverPort,RegisterService registerService) throws UnknownHostException {
+        this.registerService = registerService;
         InetAddress address=InetAddress.getLocalHost();
         this.serverAddress=address.getHostAddress();
-
         this.serverPort = serverPort;
     }
-
     /**
      * 再当前类完成加载之后
      * 启动netty-server端
@@ -55,7 +55,8 @@ public class SpringRpcProcessor implements InitializingBean,BeanPostProcessor {
 
 
     /**
-     * 当前ServiceMethodLoader的作用应该是加载我们项目中所有的被注解管理的Service服务中的所有方法
+     * 当前ServiceMethodLoader的作用应该是：
+     * 加载我们项目中所有的被注解管理的Service服务中的所有方法
      * 1:我需要一个容器，当前容器的作用是存储--》类+方法的字符串路径：方法
      * 2:需要配合注册中心保存这些方法的地址
      * 3：...
@@ -77,12 +78,12 @@ public class SpringRpcProcessor implements InitializingBean,BeanPostProcessor {
                 rpcServiceMethod.setMethod(method);
                 RpcServiceMethodCache.METHOD_CACHE.put(key,rpcServiceMethod);
 
-                //ServiceInfo serviceInfo=new ServiceInfo();
-                //serviceInfo.setServiceAddress(this.serverAddress);
-                //serviceInfo.setServicePort(this.serverPort);
-                //serviceInfo.setServiceName(serviceName);
+                RpcServiceInstance instance=new RpcServiceInstance();
+                instance.setServiceName(serviceName);
+                instance.setServiceIp(this.serverAddress);
+                instance.setServicePort(this.serverPort);
                 try {
-                    //registryService.register(serviceInfo); //住的服务
+                    registerService.register(instance); //住的服务
                 } catch (Exception e) {
                     e.printStackTrace();
                     log.error("register serivce {} failed",serviceName,e);

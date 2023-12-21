@@ -5,6 +5,7 @@ import blossom.project.rpc.core.register.RegisterService;
 import blossom.project.rpc.core.register.RpcServiceInstance;
 import blossom.project.rpc.core.register.loadbalance.LoadBalanceFactory;
 import blossom.project.rpc.core.register.loadbalance.LoadBalanceStrategy;
+import blossom.project.rpc.core.register.loadbalance.PollLoadBalance;
 import com.alibaba.nacos.api.exception.NacosException;
 import com.alibaba.nacos.api.naming.NamingFactory;
 import com.alibaba.nacos.api.naming.NamingService;
@@ -28,7 +29,8 @@ public class NacosRegisterService implements RegisterService {
 
     private NamingService namingService;
 
-    private LoadBalanceStrategy<Instance> loadBalanceStrategy;
+    private LoadBalanceStrategy<Instance> loadBalanceStrategy
+             = new PollLoadBalance<>();
 
 
     public NacosRegisterService(String serverAddress) {
@@ -90,10 +92,14 @@ public class NacosRegisterService implements RegisterService {
             List<Instance> instances = namingService.selectInstances(instance.getServiceName(),
                     instance.getGroupName(), true);
             Instance rpcInstance = loadBalanceStrategy.choose(instances);
-            if (Objects.isNull(rpcInstance)) {
+            if (Objects.nonNull(rpcInstance)) {
 
 
-                return RpcServiceInstance.builder().serviceIp(rpcInstance.getIp()).servicePort(rpcInstance.getPort()).serviceName(rpcInstance.getServiceName()).build();
+                return RpcServiceInstance.builder()
+                        .serviceIp(rpcInstance.getIp())
+                        .servicePort(rpcInstance.getPort())
+                        .serviceName(rpcInstance.getServiceName())
+                        .build();
             }
             return null;
         } catch (NacosException e) {

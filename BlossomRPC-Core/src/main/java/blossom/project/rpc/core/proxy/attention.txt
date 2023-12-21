@@ -1,6 +1,7 @@
-注意一下，其实在这个proxy目录下的代理实现，
-只是我的测试代码而已。
-我只是为了测试可以用这几种方法去实现代理。
-而真正的代理生效
+1: 考虑使用jdk和cglib以及spring进行代理
+2: 可以考虑将代码实现分为两个版本
+2.1：首先实现server端服务注册到注册中心
+2.2：修改client端的代理方法，使得client端的数据是从注册中心拿下来的
+2.3：高级修改内容：考虑高级整合spring，使得项目通用性大大提高，而不是类似于一个demo
 
 参考文献：https://grpc.io/docs/languages/java/basics/#defining-the-service

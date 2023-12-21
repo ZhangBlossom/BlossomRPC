@@ -5,7 +5,7 @@ import blossom.project.rpc.core.entity.*;
 import blossom.project.rpc.core.enums.AlgorithmTypeEnum;
 import blossom.project.rpc.core.enums.ReqTypeEnum;
 import blossom.project.rpc.core.register.RegisterService;
-import blossom.project.rpc.core.starter.NettyRpcClient;
+import blossom.project.rpc.core.netty.NettyRpcClient;
 import io.netty.channel.DefaultEventLoop;
 import io.netty.util.concurrent.DefaultPromise;
 import lombok.extern.slf4j.Slf4j;
@@ -36,9 +36,12 @@ import java.lang.reflect.Method;
 public class JdkRpcProxyInvocationHandler implements InvocationHandler {
 
     //TODO 这里暂时先考虑硬编码 后续有时间可以考虑用注册中心
+    @Deprecated
     private String host;
+    @Deprecated
     private int port;
 
+    @Deprecated
     public JdkRpcProxyInvocationHandler(String host, int port) {
         this.host = host;
         this.port = port;
@@ -46,6 +49,8 @@ public class JdkRpcProxyInvocationHandler implements InvocationHandler {
 
     private RegisterService registerService;
 
+    //TODO 思考一下客户端使用的时候如何为这里注入注册中心
+    //TODO 后续应该思考 项目肯定是通用同一个注册中心的，这个类可以变成单例
     public JdkRpcProxyInvocationHandler(RegisterService registerService){
         this.registerService = registerService;
     }
@@ -78,6 +83,7 @@ public class JdkRpcProxyInvocationHandler implements InvocationHandler {
         //TODO 不应该每次都new一个Client，Client应该是复用的
         // 考虑用final把 time：2023/12/16 01：12
         NettyRpcClient nettyClient=new NettyRpcClient(host,port);
+        //NettyRpcClient nettyClient=new NettyRpcClient();
         //得到一个promise对象，先存起来，等doRequest拿到数据之后就会设定值进去
         //那么此时promise的get的阻塞就会结束
         DefaultPromise<RpcResponse> promise = new DefaultPromise(new DefaultEventLoop());

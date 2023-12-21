@@ -16,7 +16,7 @@ import org.springframework.stereotype.Component;
  *
  */
 @Component
-//@Deprecated
+@Deprecated
 public class SpringBeanManager implements ApplicationContextAware {
 
     private static ApplicationContext applicationContext;

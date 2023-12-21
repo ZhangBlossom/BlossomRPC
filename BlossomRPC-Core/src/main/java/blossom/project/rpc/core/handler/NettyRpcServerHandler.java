@@ -6,7 +6,7 @@ import blossom.project.rpc.core.entity.RpcHeader;
 import blossom.project.rpc.core.entity.RpcRequest;
 import blossom.project.rpc.core.entity.RpcResponse;
 import blossom.project.rpc.core.enums.ReqTypeEnum;
-import blossom.project.rpc.core.proxy.spring.server.SpringRpcProxy;
+import blossom.project.rpc.core.proxy.spring.rpcmethod.RpcServiceMethodCache;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 
@@ -38,11 +38,15 @@ public class NettyRpcServerHandler extends SimpleChannelInboundHandler<RpcDto<Rp
         //使用反射的方式在运行时调用对应的类的方法
         //这里你可以思考一下用什么方式可以最快的找到我想要的类并且调用方法
         //目前我提供了：JDK CGLIB SpringIOC容器 HashMap自制工厂
-        Object data = SpringRpcProxy.invoke(msg.getData());
+        //Object data = SpringRpcProxy.invoke(msg.getData());
         //使用JDK动态代理
         //Object data = RpcInvocationHandler.invoke(msg.getData());
         //使用CGLIB动态代理
         //Object data = RpcCglibProxy.invoke(msg.getData());
+        //使用封装好的rpc对象去发送请求
+        Object data = RpcServiceMethodCache
+                .getInstance()
+                .rpcMethodInvoke(msg.getData());
         RpcDto<RpcResponse> dto = new RpcDto();
         RpcResponse response = new RpcResponse();
         response.setData(data);

@@ -18,6 +18,6 @@ public class PollLoadBalance<T> implements LoadBalanceStrategy<T>{
 
     @Override
     public T choose(List<T> instances) {
-        return null;
+        return instances.get(0);
     }
 }

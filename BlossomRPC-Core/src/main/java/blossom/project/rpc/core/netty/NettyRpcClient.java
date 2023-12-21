@@ -1,18 +1,17 @@
-package blossom.project.rpc.core.starter;
+package blossom.project.rpc.core.netty;
 
+import blossom.project.rpc.core.constants.RpcCommonConstants;
 import blossom.project.rpc.core.entity.RpcDto;
 import blossom.project.rpc.core.entity.RpcRequest;
 import blossom.project.rpc.core.handler.NettyRpcClientInitializer;
 import blossom.project.rpc.core.register.RegisterService;
+import blossom.project.rpc.core.register.RpcServiceInstance;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.ChannelFuture;
-import io.netty.channel.ChannelFutureListener;
 import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import lombok.extern.slf4j.Slf4j;
-
-import java.util.concurrent.ExecutionException;
 
 /**
  * @author: ZhangBlossom
@@ -37,9 +36,7 @@ public class NettyRpcClient {
         this.serviceAddress = serviceAddress;
         this.servicePort = servicePort;
 
-        bootstrap.group(eventLoopGroup)
-                .channel(NioSocketChannel.class)
-                .handler(new NettyRpcClientInitializer());
+        bootstrap.group(eventLoopGroup).channel(NioSocketChannel.class).handler(new NettyRpcClientInitializer());
 
         log.info("start NettyClient successfully！！！ , serviceAddress: {} , servivePort: {}", serviceAddress,
                 servicePort);
@@ -47,26 +44,35 @@ public class NettyRpcClient {
 
     /**
      * 当前方法用于发送我们组装好地请求数据
+     *
      * @param requestRpcDto
      * @throws InterruptedException
      */
     public void doRequest(RpcDto<RpcRequest> requestRpcDto, RegisterService registerService) {
+        RpcServiceInstance instance =
+                registerService
+                        .discovery(RpcServiceInstance
+                                .builder()
+                                .serviceName(requestRpcDto.getData().getClassName())
+                                .groupName(RpcCommonConstants.DEFAULT_GROUP)
+                                .build());
         final ChannelFuture future;
         try {
             // 连接到服务器。这里使用了bootstrap对象（预先配置好的客户端启动器）来建立连接。
             // 连接到指定的服务地址和端口，并且同步等待直到连接完成。
-            future = bootstrap
-                    .connect(this.serviceAddress, this.servicePort)
-                    .sync();
+            //future = bootstrap.connect(this.serviceAddress, this.servicePort).sync();
+            future = bootstrap.connect(instance.getServiceIp(), instance.getServicePort()).sync();
 
             // 给future添加监听器，用于处理连接操作的结果。
             future.addListener(listener -> {
                 // 如果连接成功，记录一条日志信息。
                 if (future.isSuccess()) {
-                    log.info("Connect to NettyRpcServer successfully...", this.serviceAddress);
+                    log.info("Connect to NettyRpcServer {} successfully...",
+                            instance.getServiceIp() + instance.getServicePort());
                 } else {
                     // 如果连接失败，记录错误日志，并打印异常堆栈，然后优雅地关闭事件循环组。
-                    log.error("Connect to NettyRpcServer failed...", this.serviceAddress);
+                    log.error("Connect to NettyRpcServer {} failed...",
+                            instance.getServiceIp() + instance.getServicePort());
                     future.cause().printStackTrace();
                     eventLoopGroup.shutdownGracefully();
                 }

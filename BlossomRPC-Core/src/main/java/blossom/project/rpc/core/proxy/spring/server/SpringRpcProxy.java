@@ -16,7 +16,7 @@ import java.lang.reflect.Method;
  * SpringRpcProxy类
  */
 @Component
-//@Deprecated
+@Deprecated
 public class SpringRpcProxy {
     /**
      * 反射方法调用

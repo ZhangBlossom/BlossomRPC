@@ -36,7 +36,14 @@ public class RpcServiceMethodCache {
         return INSTANCE;
     }
 
-    public Object processor(RpcRequest request){
+    /**
+     * 当前方法用于调用rpcmethod
+     * 这里的invoke方法最终目的就是真正的去调用client发送过来的rpc请求，
+     * 从cache里面拿到那些有注解的rpc方法即可
+     * @param request
+     * @return
+     */
+    public Object rpcMethodInvoke(RpcRequest request){
         String key=request.getClassName()+"."+request.getMethodName();
         RpcServiceMethod rpcServiceMethod= METHOD_CACHE.get(key);
         if(Objects.isNull(rpcServiceMethod)){

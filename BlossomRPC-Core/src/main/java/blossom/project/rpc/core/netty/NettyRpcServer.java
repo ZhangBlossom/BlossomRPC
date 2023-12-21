@@ -1,4 +1,4 @@
-package blossom.project.rpc.core.starter;
+package blossom.project.rpc.core.netty;
 
 import blossom.project.rpc.core.handler.NettyRpcServerInitializer;
 import io.netty.bootstrap.ServerBootstrap;

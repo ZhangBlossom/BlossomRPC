@@ -9,6 +9,7 @@ package blossom.project.rpc.core.service;
  * @github: https://github.com/ZhangBlossom
  * BlossomRpcService接口
  */
+@Deprecated
 public interface RpcService {
 
     String testRpcRequest(String info);

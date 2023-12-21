@@ -21,9 +21,7 @@ import java.util.Objects;
  * ServerRpcBootstrap类
  */
 @Slf4j
-@SpringBootApplication(scanBasePackages =
-        {"blossom.project.rpc.server.service.impl",
-        "blossom.project.rpc.core.proxy.spring"})
+@SpringBootApplication(scanBasePackages = "blossom.project.rpc")
 public class ServerRpcBootstrap {
     public static void main(String[] args) {
         ConfigurableApplicationContext context = SpringApplication.run(ServerRpcBootstrap.class, args);

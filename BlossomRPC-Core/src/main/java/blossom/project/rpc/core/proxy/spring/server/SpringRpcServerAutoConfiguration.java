@@ -3,6 +3,7 @@ package blossom.project.rpc.core.proxy.spring.server;
 import blossom.project.rpc.core.enums.RegisterTypeEnum;
 import blossom.project.rpc.core.register.RegisterFactory;
 import blossom.project.rpc.core.register.RegisterService;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -21,14 +22,17 @@ import java.net.UnknownHostException;
 @Configuration
 //开启配置文件
 @EnableConfigurationProperties(SpringRpcServerProperties.class)
-public class SpringRpcAutoConfiguration {
+public class SpringRpcServerAutoConfiguration {
 
     @Bean
-    public SpringRpcServiceDeclarationProcessor springRpcProviderBean(SpringRpcServerProperties properties) throws UnknownHostException {
+    public SpringRpcServiceDeclarationProcessor
+    springRpcServiceDeclarationProcessor(
+            @Qualifier(value = "springRpcServerProperties")
+            SpringRpcServerProperties properties) throws UnknownHostException {
         //创建注册中心
-        RegisterService registerService = RegisterFactory.createRegistryService(
+        RegisterService registerService = RegisterFactory.createRegisterService(
                 properties.getRegisterAddress(),
-                RegisterTypeEnum.findByName(properties.getRegisterType()));
+                RegisterTypeEnum.findByName(properties.getRegisterName()));
         return new SpringRpcServiceDeclarationProcessor
                 (properties.getServicePort(),registerService);
     }

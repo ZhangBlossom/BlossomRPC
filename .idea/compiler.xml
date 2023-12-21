@@ -6,13 +6,15 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="BlossomRPC-Server" />
         <module name="BlossomRPC-Client" />
         <module name="BlossomRPC-Core" />
+        <module name="BlossomRPC-Server" />
+        <module name="BlossomRPC-Api" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="BlossomRPC" target="19" />
+      <module name="BlossomRPC-Api" target="19" />
       <module name="BlossomRPC-Client" target="19" />
       <module name="BlossomRPC-Core" target="19" />
       <module name="BlossomRPC-Server" target="19" />

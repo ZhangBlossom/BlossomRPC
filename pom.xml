@@ -11,6 +11,7 @@
     <packaging>pom</packaging>
 
     <modules>
+        <module>BlossomRPC-Api</module>
         <module>BlossomRPC-Core</module>
         <module>BlossomRPC-Server</module>
         <module>BlossomRPC-Client</module>

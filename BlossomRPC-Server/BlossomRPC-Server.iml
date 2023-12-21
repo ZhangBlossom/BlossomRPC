@@ -62,6 +62,7 @@
     <orderEntry type="library" name="Maven: org.springframework:spring-core:5.3.25" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-jcl:5.3.25" level="project" />
     <orderEntry type="library" name="Maven: org.yaml:snakeyaml:1.30" level="project" />
+    <orderEntry type="module" module-name="BlossomRPC-Api" />
     <orderEntry type="library" name="Maven: org.projectlombok:lombok:1.18.24" level="project" />
     <orderEntry type="library" name="Maven: io.netty:netty-all:4.1.51.Final" level="project" />
     <orderEntry type="library" name="Maven: org.asynchttpclient:async-http-client:2.0.37" level="project" />

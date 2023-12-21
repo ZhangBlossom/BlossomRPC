@@ -3,11 +3,8 @@ package blossom.project.rpc.core.register;
 import blossom.project.rpc.core.enums.RegisterTypeEnum;
 import blossom.project.rpc.core.register.nacos.NacosRegisterService;
 import blossom.project.rpc.core.register.zk.ZookeeperRegisterService;
-import com.alibaba.nacos.api.naming.NamingService;
-import org.springframework.beans.factory.BeanFactory;
 
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
+import java.util.Objects;
 
 /**
  * @author: ZhangBlossom
@@ -28,19 +25,22 @@ public class RegisterFactory  {
     //private static  Map<String,Object> REGISTER_CACHE = new ConcurrentHashMap<>();
 
 
-    public static RegisterService createRegistryService(String serverAddress, RegisterTypeEnum registryType){
+    public static RegisterService createRegisterService(String registerAddress, RegisterTypeEnum registryType){
         RegisterService registerService=null;
         try{
             switch (registryType){
                 case NACOS:
-                    registerService=new NacosRegisterService(serverAddress);
+                    registerService=new NacosRegisterService(registerAddress);
                     break;
                 case ZOOKEEPER:
-                    registerService=new ZookeeperRegisterService(serverAddress);
+                    registerService=new ZookeeperRegisterService(registerAddress);
                     break;
                 default:
-                    registerService=new NacosRegisterService(serverAddress);
+                    registerService=new NacosRegisterService(registerAddress);
                     break;
+            }
+            if (Objects.isNull(registerService)){
+                throw new Exception("the Registere Service can not be null!!!");
             }
         }catch (Exception e){
             e.printStackTrace();

@@ -1,5 +1,6 @@
 package blossom.project.rpc.core.proxy.spring.client;
 
+import blossom.project.rpc.core.proxy.spring.SpringRpcProperties;
 import blossom.project.rpc.core.proxy.spring.annotation.RpcAutowiredProxy;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeansException;
@@ -35,9 +36,9 @@ public class SpringRpcAutowiredProxyProcessor implements
         ApplicationContextAware, BeanClassLoaderAware, BeanFactoryPostProcessor {
     private ApplicationContext context;
     private ClassLoader classLoader;
-    private SpringRpcClientProperties properties;
+    private SpringRpcProperties properties;
 
-    public SpringRpcAutowiredProxyProcessor(SpringRpcClientProperties properties) {
+    public SpringRpcAutowiredProxyProcessor(SpringRpcProperties properties) {
         this.properties = properties;
     }
 
@@ -94,6 +95,7 @@ public class SpringRpcAutowiredProxyProcessor implements
             builder.addPropertyValue("interfaceClass", field.getType());
             builder.addPropertyValue("registerAddress", properties.getRegisterAddress());
             builder.addPropertyValue("registerName", properties.getRegisterName());
+            builder.addPropertyValue("loadBalanceStrategy", properties.getLoadBalanceStrategy());
             builder.addPropertyValue("clientProperties", properties);
 
             BeanDefinition beanDefinition = builder.getBeanDefinition();

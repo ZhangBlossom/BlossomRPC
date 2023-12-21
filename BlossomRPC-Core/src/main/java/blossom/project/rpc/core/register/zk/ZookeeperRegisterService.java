@@ -39,7 +39,7 @@ public class ZookeeperRegisterService implements RegisterService {
 
     private LoadBalanceStrategy<ServiceInstance<RpcServiceInstance>> loadBalanceStrategy;
 
-    public ZookeeperRegisterService(String serverAddress) throws Exception {
+    public ZookeeperRegisterService(String serverAddress,LoadBalanceStrategy loadBalanceStrategy) throws Exception {
         CuratorFramework client = CuratorFrameworkFactory
                 .newClient(serverAddress,
                         new ExponentialBackoffRetry(2000, 3));
@@ -52,7 +52,7 @@ public class ZookeeperRegisterService implements RegisterService {
                         .basePath(REGISTRY_PATH)
                         .build();
         this.serviceDiscovery.start();
-        this.loadBalanceStrategy = new RandomLoadBalance();
+        this.loadBalanceStrategy = loadBalanceStrategy;
     }
 
     @Override

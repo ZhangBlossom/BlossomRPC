@@ -1,8 +1,9 @@
 blossom:
   rpc:
-    client:
-      registerAddress: localhost:8848
-      registerName: nacos
+    serviceAddress: 127.0.0.1
+    servicePort: 8080
+    registerAddress: localhost:8848
+    registerName: nacos
 
 server:
-  port: 8090
+  port: 8888

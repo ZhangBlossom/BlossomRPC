@@ -12,20 +12,21 @@ package blossom.project.rpc.core.enums;
 public enum LoadBalanceTypeEnum {
 
     //轮询
-    POLL((byte)0),
+    POLL("POLL"),
     //权重
-    WEIGHT((byte)1),
+    WEIGHT("WEIGHT"),
     //负载均衡
-    RANDOM((byte)2);
-    private byte code;
+    RANDOM("RANDOM");
+    private String name;
 
-    LoadBalanceTypeEnum(byte code){
-        this.code=code;
+
+    LoadBalanceTypeEnum(String name) {
+        this.name = name;
     }
 
-    public static LoadBalanceTypeEnum findByCode(int code){
-        for(LoadBalanceTypeEnum type: LoadBalanceTypeEnum.values()){
-            if(type.code==code){
+    public static LoadBalanceTypeEnum findByName(String name) {
+        for (LoadBalanceTypeEnum type : LoadBalanceTypeEnum.values()) {
+            if (type.name.equalsIgnoreCase(name)) {
                 return type;
             }
         }

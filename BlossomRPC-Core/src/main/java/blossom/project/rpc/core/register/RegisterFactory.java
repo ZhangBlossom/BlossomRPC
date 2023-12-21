@@ -1,6 +1,7 @@
 package blossom.project.rpc.core.register;
 
 import blossom.project.rpc.core.enums.RegisterTypeEnum;
+import blossom.project.rpc.core.register.loadbalance.LoadBalanceStrategy;
 import blossom.project.rpc.core.register.nacos.NacosRegisterService;
 import blossom.project.rpc.core.register.zk.ZookeeperRegisterService;
 
@@ -25,18 +26,20 @@ public class RegisterFactory  {
     //private static  Map<String,Object> REGISTER_CACHE = new ConcurrentHashMap<>();
 
 
-    public static RegisterService createRegisterService(String registerAddress, RegisterTypeEnum registryType){
+    public static RegisterService createRegisterService(String registerAddress,
+                                                        RegisterTypeEnum registryType,
+                                                        LoadBalanceStrategy loadBalanceStrategy){
         RegisterService registerService=null;
         try{
             switch (registryType){
                 case NACOS:
-                    registerService=new NacosRegisterService(registerAddress);
+                    registerService=new NacosRegisterService(registerAddress,loadBalanceStrategy);
                     break;
                 case ZOOKEEPER:
-                    registerService=new ZookeeperRegisterService(registerAddress);
+                    registerService=new ZookeeperRegisterService(registerAddress,loadBalanceStrategy);
                     break;
                 default:
-                    registerService=new NacosRegisterService(registerAddress);
+                    registerService=new NacosRegisterService(registerAddress,loadBalanceStrategy);
                     break;
             }
             if (Objects.isNull(registerService)){

@@ -1,6 +1,7 @@
 package blossom.project.rpc.core.proxy.spring.client;
 
 import blossom.project.rpc.core.enums.RegisterTypeEnum;
+import blossom.project.rpc.core.proxy.spring.SpringRpcProperties;
 import blossom.project.rpc.core.register.RegisterFactory;
 import blossom.project.rpc.core.register.RegisterService;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -21,15 +22,18 @@ import java.net.UnknownHostException;
  */
 @Configuration
 //开启配置文件
-@EnableConfigurationProperties(SpringRpcClientProperties.class)
+//@EnableConfigurationProperties(SpringRpcClientProperties.class)
 public class SpringRpcClientAutoConfigration
 {
 
     @Bean
     public SpringRpcAutowiredProxyProcessor
     springRpcAutowiredProxyProcessor(
-            @Qualifier(value = "springRpcClientProperties")
-            SpringRpcClientProperties properties)
+            //@Qualifier(value = "springRpcClientProperties")
+            //SpringRpcClientProperties properties
+            @Qualifier("springRpcProperties")
+            SpringRpcProperties properties
+    )
     {
         //创建注册中心
         return new SpringRpcAutowiredProxyProcessor(properties);

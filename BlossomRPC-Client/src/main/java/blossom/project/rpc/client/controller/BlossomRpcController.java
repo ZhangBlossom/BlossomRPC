@@ -20,8 +20,9 @@ public class BlossomRpcController {
 
     //TODO 应该扫描所有有这个注解的属性
     //并且进行动态代理
-    //@RpcAutowiredProxy
-    //private RpcService rpcService;
+
+    @RpcAutowiredProxy
+    private RpcService rpcService;
 
 
     @RpcAutowiredProxy

@@ -2,6 +2,7 @@ package blossom.project.rpc.core.proxy.spring.server;
 
 import lombok.Data;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
@@ -17,17 +18,26 @@ import org.springframework.context.annotation.Configuration;
  */
 @Data
 @Configuration(value = "springRpcServerProperties")
-@ConfigurationProperties(prefix = "blossom.rpc.server")
+//@ConfigurationProperties(prefix = "blossom.rpc.server")
 public class SpringRpcServerProperties implements InitializingBean {
+    @Value("${blossom.rpc.server.serviceAddress:localhost}")
     private String serviceAddress;
 
+    @Value("${blossom.rpc.server.servicePort:8081}")
     private int servicePort;
 
     //注册中心的地址 localhost:8848
-    private String registerAddress;
+
+    @Value("${blossom.rpc.server.registerAddress:localhost:8848}")
+    private String registerAddress = "localhost:8848";
 
     //注册中心的类型 nacos zk
-    private String registerName;
+    @Value("${blossom.rpc.server.registerName:nacos}")
+    private String registerName = "nacos";
+
+    @Value("${blossom.rpc.server.loadBalance:POLL}")
+    private String loadBalanceStrategy;
+
 
     @Override
     public void afterPropertiesSet() throws Exception {
@@ -36,6 +46,7 @@ public class SpringRpcServerProperties implements InitializingBean {
         System.out.println(this.servicePort);
         System.out.println(this.registerAddress);
         System.out.println(this.registerName);
+        System.out.println(this.loadBalanceStrategy);
         System.out.println("-----Blossom RPC Server Config Info-----");
     }
 }

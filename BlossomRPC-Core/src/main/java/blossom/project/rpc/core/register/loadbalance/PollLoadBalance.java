@@ -1,5 +1,8 @@
 package blossom.project.rpc.core.register.loadbalance;
 
+import org.springframework.util.CollectionUtils;
+
+import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -18,6 +21,9 @@ public class PollLoadBalance<T> implements LoadBalanceStrategy<T>{
 
     @Override
     public T choose(List<T> instances) {
+        if (CollectionUtils.isEmpty(instances)){
+            return null;
+        }
         return instances.get(0);
     }
 }

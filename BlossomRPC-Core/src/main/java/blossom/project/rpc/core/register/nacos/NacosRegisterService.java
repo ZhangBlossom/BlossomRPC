@@ -41,10 +41,10 @@ public class NacosRegisterService implements RegisterService {
         }
     }
 
-    public NacosRegisterService(String serverAddress, LoadBalanceTypeEnum typeEnum) {
+    public NacosRegisterService(String serverAddress, LoadBalanceStrategy loadBalanceStrategy) {
         try {
             this.namingService = NamingFactory.createNamingService(serverAddress);
-            this.loadBalanceStrategy = LoadBalanceFactory.getLoadBalanceStrategy(typeEnum);
+            this.loadBalanceStrategy = loadBalanceStrategy;
         } catch (NacosException e) {
             throw new RuntimeException(e);
         }

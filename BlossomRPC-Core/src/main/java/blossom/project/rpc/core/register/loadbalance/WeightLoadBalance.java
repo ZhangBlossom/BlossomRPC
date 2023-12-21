@@ -1,5 +1,7 @@
 package blossom.project.rpc.core.register.loadbalance;
 
+import org.springframework.util.CollectionUtils;
+
 import java.util.List;
 
 /**
@@ -15,6 +17,9 @@ public class WeightLoadBalance<T> implements LoadBalanceStrategy<T>{
 
     @Override
     public T choose(List<T> instances) {
-        return null;
+        if (CollectionUtils.isEmpty(instances)){
+            return null;
+        }
+        return instances.get(0);
     }
 }

@@ -1,5 +1,6 @@
 package blossom.project.rpc.core.proxy.spring.server;
 
+import blossom.project.rpc.core.proxy.spring.SpringRpcProperties;
 import lombok.Data;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Value;
@@ -17,9 +18,11 @@ import org.springframework.context.annotation.Configuration;
  * 项目通用spring相关配置类
  */
 @Data
-@Configuration(value = "springRpcServerProperties")
+//@Configuration(value = "springRpcServerProperties")
+@Deprecated
 //@ConfigurationProperties(prefix = "blossom.rpc.server")
-public class SpringRpcServerProperties implements InitializingBean {
+public class SpringRpcServerProperties extends SpringRpcProperties
+        implements InitializingBean {
     @Value("${blossom.rpc.server.serviceAddress:localhost}")
     private String serviceAddress;
 

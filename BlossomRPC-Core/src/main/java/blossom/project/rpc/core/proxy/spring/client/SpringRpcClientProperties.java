@@ -22,7 +22,7 @@ import org.springframework.context.annotation.Configuration;
  */
 @Deprecated
 @Data
-@Configuration(value = "springRpcClientProperties")
+//@Configuration(value = "springRpcClientProperties")
 //@ConfigurationProperties(prefix = "blossom.rpc.client")
 public class SpringRpcClientProperties extends SpringRpcProperties implements InitializingBean {
 

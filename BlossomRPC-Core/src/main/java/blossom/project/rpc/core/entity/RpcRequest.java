@@ -25,8 +25,10 @@ public class RpcRequest implements Serializable {
     //public static final long serialVersionUID = 200201141215L;
     //调用的服务名称（类似于类名）
     private String className;
+
     //调用的目标方法名称
     private String methodName;
+
     //请求参数
     private Object[] params;
 

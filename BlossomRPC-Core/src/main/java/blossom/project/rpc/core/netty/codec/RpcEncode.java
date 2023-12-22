@@ -1,9 +1,9 @@
-package blossom.project.rpc.core.codec;
+package blossom.project.rpc.core.netty.codec;
 
 import blossom.project.rpc.core.entity.RpcDto;
 import blossom.project.rpc.core.entity.RpcHeader;
 import blossom.project.rpc.core.serialize.Serializer;
-import blossom.project.rpc.core.serialize.SerializerManager;
+import blossom.project.rpc.core.serialize.SerializerStrategy;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.MessageToByteEncoder;
@@ -36,7 +36,7 @@ public class RpcEncode extends MessageToByteEncoder<RpcDto<Object>> {
         out.writeByte(RpcHeader.getReqType());
         out.writeLong(RpcHeader.getReqId());
         //设定序列化算法
-        Serializer serializer= SerializerManager.getSerializer(RpcHeader.getAlgorithmType());
+        Serializer serializer= SerializerStrategy.getSerializer(RpcHeader.getAlgorithmType());
         byte[] data=serializer.serialize(msg.getData());
         //设定数据长度
         out.writeInt(data.length);

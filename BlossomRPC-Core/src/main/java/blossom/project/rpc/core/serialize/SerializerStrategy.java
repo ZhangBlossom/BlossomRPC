@@ -12,13 +12,14 @@ import java.util.Map;
  * @contact: WX:qczjhczs0114
  * @blog: https://blog.csdn.net/Zhangsama1
  * @github: https://github.com/ZhangBlossom
- * SerializerManager管理器
+ *
+ * SerializerStrategy
  * 使用简单策略模式的方式来对多种序列化器的实现进行管理
  *
  */
 
 
-public class SerializerManager {
+public class SerializerStrategy {
 
 
     private static final Map<Byte, Serializer> serializerMap = new HashMap<>();

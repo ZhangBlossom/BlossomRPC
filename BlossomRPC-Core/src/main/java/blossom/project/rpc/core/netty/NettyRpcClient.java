@@ -3,7 +3,7 @@ package blossom.project.rpc.core.netty;
 import blossom.project.rpc.core.constants.RpcCommonConstants;
 import blossom.project.rpc.core.entity.RpcDto;
 import blossom.project.rpc.core.entity.RpcRequest;
-import blossom.project.rpc.core.handler.NettyRpcClientInitializer;
+import blossom.project.rpc.core.netty.handler.NettyRpcClientInitializer;
 import blossom.project.rpc.core.register.RegisterService;
 import blossom.project.rpc.core.register.RpcServiceInstance;
 import io.netty.bootstrap.Bootstrap;

@@ -1,4 +1,4 @@
-package blossom.project.rpc.core.codec;
+package blossom.project.rpc.core.netty.codec;
 
 import blossom.project.rpc.core.constants.RpcCommonConstants;
 import blossom.project.rpc.core.entity.RpcDto;
@@ -7,7 +7,7 @@ import blossom.project.rpc.core.entity.RpcRequest;
 import blossom.project.rpc.core.entity.RpcResponse;
 import blossom.project.rpc.core.enums.ReqTypeEnum;
 import blossom.project.rpc.core.serialize.Serializer;
-import blossom.project.rpc.core.serialize.SerializerManager;
+import blossom.project.rpc.core.serialize.SerializerStrategy;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.ByteToMessageDecoder;
@@ -60,7 +60,7 @@ public class RpcDecode extends ByteToMessageDecoder {
         RpcHeader header = new RpcHeader(
                 versionId, algorithmType, reqType, reqId, length);
         //获得反序列化器
-        Serializer serializer = SerializerManager.getSerializer(algorithmType);
+        Serializer serializer = SerializerStrategy.getSerializer(algorithmType);
         //获得请求类型
         ReqTypeEnum reqTypeEnum = ReqTypeEnum.getReqTypeByCode(reqType);
         //得到实际传输的数据

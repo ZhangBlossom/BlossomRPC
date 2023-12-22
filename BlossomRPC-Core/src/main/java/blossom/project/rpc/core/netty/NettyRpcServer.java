@@ -1,6 +1,6 @@
 package blossom.project.rpc.core.netty;
 
-import blossom.project.rpc.core.handler.NettyRpcServerInitializer;
+import blossom.project.rpc.core.netty.handler.NettyRpcServerInitializer;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;

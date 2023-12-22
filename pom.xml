@@ -41,6 +41,7 @@
         <fastjson.verson>1.2.76</fastjson.verson>
         <jsonpath.version>2.4.0</jsonpath.version>
         <kafka.version>2.3.1</kafka.version>
+        <com.alibaba.boot>0.2.12</com.alibaba.boot>
     </properties>
 
     <dependencies>

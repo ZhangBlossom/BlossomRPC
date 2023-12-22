@@ -7,3 +7,9 @@ blossom:
 
 server:
   port: 9999
+
+nacos:
+  discovery:
+    register:
+      ip: 123.249.111.175
+      port: 8848

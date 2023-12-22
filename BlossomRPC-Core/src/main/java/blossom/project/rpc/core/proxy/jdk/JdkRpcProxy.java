@@ -51,7 +51,6 @@ public class JdkRpcProxy implements InvocationHandler {
         if (serviceInstance == null) {
             throw new ClassNotFoundException("Service implementation not found for: " + request.getClassName());
         }
-
         Class<?> clazz = serviceInstance.getClass();
         Method method = clazz.getMethod(request.getMethodName(), request.getParamsTypes());
         return method.invoke(serviceInstance, request.getParams());

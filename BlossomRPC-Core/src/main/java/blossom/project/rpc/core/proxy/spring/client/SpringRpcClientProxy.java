@@ -18,6 +18,11 @@ import java.lang.reflect.Proxy;
  * @blog: https://blog.csdn.net/Zhangsama1
  * @github: https://github.com/ZhangBlossom
  * SpringRpcClientProxy类
+ *
+ * !!!!!!!
+ * 超级重要，为了保证BeanDefinitionBuilder的addPropertyValue
+ * 方法可以调用成功，请确保当前类存在有set/get方法
+ * !!!!!!!
  */
 public class SpringRpcClientProxy implements
         FactoryBean<Object>, InitializingBean {
@@ -118,5 +123,11 @@ public class SpringRpcClientProxy implements
         this.clientProperties = clientProperties;
     }
 
+    public RegisterService getRegisterService() {
+        return registerService;
+    }
 
+    public void setRegisterService(RegisterService registerService) {
+        this.registerService = registerService;
+    }
 }

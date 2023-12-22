@@ -24,7 +24,8 @@ import org.springframework.context.annotation.Configuration;
 @Data
 //@Configuration(value = "springRpcClientProperties")
 //@ConfigurationProperties(prefix = "blossom.rpc.client")
-public class SpringRpcClientProperties extends SpringRpcProperties implements InitializingBean {
+public class SpringRpcClientProperties
+        extends SpringRpcProperties implements InitializingBean {
 
     //注册中心的地址 localhost:8848
     @Value("${blossom.rpc.client.registerAddress:localhost:8848}")

@@ -38,6 +38,11 @@
             <artifactId>BlossomRPC-Api</artifactId>
             <version>1.0</version>
         </dependency>
+        <dependency>
+            <groupId>blossom.project</groupId>
+            <artifactId>BlossomRPC-Nacos</artifactId>
+            <version>1.0</version>
+        </dependency>
     </dependencies>
 
 

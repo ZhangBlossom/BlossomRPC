@@ -1,4 +1,4 @@
-package blossom.project.rpc.common;
+package blossom.project.rpc.common.register;
 
 /**
  * @author: ZhangBlossom

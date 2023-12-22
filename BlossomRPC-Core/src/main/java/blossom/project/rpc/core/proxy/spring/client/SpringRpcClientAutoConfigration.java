@@ -1,12 +1,10 @@
 package blossom.project.rpc.core.proxy.spring.client;
 
-import blossom.project.rpc.common.RegisterService;
+import blossom.project.rpc.common.register.RegisterService;
 import blossom.project.rpc.core.proxy.spring.SpringRpcProperties;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
-import java.net.UnknownHostException;
 
 /**
  * @author: ZhangBlossom

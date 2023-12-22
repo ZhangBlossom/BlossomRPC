@@ -1,6 +1,6 @@
 package blossom.project.rpc.core.proxy.spring.client;
 
-import blossom.project.rpc.common.RegisterService;
+import blossom.project.rpc.common.register.RegisterService;
 import blossom.project.rpc.common.enums.AlgorithmTypeEnum;
 import blossom.project.rpc.common.enums.ReqTypeEnum;
 import blossom.project.rpc.core.constants.RpcCommonConstants;

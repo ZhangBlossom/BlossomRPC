@@ -1,4 +1,4 @@
-package blossom.project.rpc.core.register.nacos;
+package blossom.project.rpc.nacos;
 
 import org.springframework.context.annotation.Condition;
 import org.springframework.context.annotation.ConditionContext;

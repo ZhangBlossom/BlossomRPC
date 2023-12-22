@@ -1,4 +1,4 @@
-package blossom.project.rpc.core.register.zk;
+package blossom.project.rpc.zookeeper;
 
 import org.springframework.context.annotation.Condition;
 import org.springframework.context.annotation.ConditionContext;

@@ -16,13 +16,14 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="BlossomRPC" target="19" />
+      <module name="BlossomRPC" target="1.8" />
       <module name="BlossomRPC-Api" target="19" />
+      <module name="BlossomRPC-Api (1)" target="19" />
       <module name="BlossomRPC-Client" target="19" />
       <module name="BlossomRPC-Common" target="19" />
       <module name="BlossomRPC-Core" target="19" />
       <module name="BlossomRPC-Nacos" target="19" />
-      <module name="BlossomRPC-Server" target="19" />
+      <module name="BlossomRPC-Server" target="1.8" />
       <module name="BlossomRPC-Zookeeper" target="19" />
     </bytecodeTargetLevel>
   </component>

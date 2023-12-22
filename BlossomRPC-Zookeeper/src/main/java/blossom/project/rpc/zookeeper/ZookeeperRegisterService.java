@@ -1,7 +1,7 @@
 package blossom.project.rpc.zookeeper;
 
-import blossom.project.rpc.common.RegisterService;
-import blossom.project.rpc.common.RpcServiceInstance;
+import blossom.project.rpc.common.register.RegisterService;
+import blossom.project.rpc.common.register.RpcServiceInstance;
 import blossom.project.rpc.common.loadbalance.LoadBalanceStrategy;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.curator.framework.CuratorFramework;

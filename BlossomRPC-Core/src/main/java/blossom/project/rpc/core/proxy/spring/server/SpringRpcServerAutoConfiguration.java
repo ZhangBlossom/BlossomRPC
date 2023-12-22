@@ -1,13 +1,11 @@
 package blossom.project.rpc.core.proxy.spring.server;
 
-import blossom.project.rpc.common.RegisterService;
-import blossom.project.rpc.common.enums.LoadBalanceTypeEnum;
-import blossom.project.rpc.common.enums.RegisterTypeEnum;
-import blossom.project.rpc.common.loadbalance.LoadBalanceFactory;
+import blossom.project.rpc.common.register.RegisterService;
 import blossom.project.rpc.core.proxy.spring.SpringRpcProperties;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.DependsOn;
 
 import java.net.UnknownHostException;
 
@@ -20,9 +18,11 @@ import java.net.UnknownHostException;
  * @github: https://github.com/ZhangBlossom
  * SpringRpcConfiguration类
  */
-@Configuration
+//@Configuration
 //开启配置文件
 //@EnableConfigurationProperties(SpringRpcServerProperties.class)
+@Deprecated
+
 public class SpringRpcServerAutoConfiguration {
 
     @Bean

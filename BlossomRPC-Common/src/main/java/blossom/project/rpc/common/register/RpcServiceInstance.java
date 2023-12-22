@@ -1,5 +1,6 @@
-package blossom.project.rpc.common;
+package blossom.project.rpc.common.register;
 
+import blossom.project.rpc.common.constants.RpcCommonConstants;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

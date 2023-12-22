@@ -1,6 +1,6 @@
 package blossom.project.rpc.core.proxy.spring.client;
 
-import blossom.project.rpc.common.RegisterService;
+import blossom.project.rpc.common.register.RegisterService;
 import blossom.project.rpc.core.proxy.spring.SpringRpcProperties;
 import blossom.project.rpc.core.proxy.spring.annotation.RpcAutowiredProxy;
 import lombok.extern.slf4j.Slf4j;

@@ -1,7 +1,7 @@
 package blossom.project.rpc.nacos;
 
-import blossom.project.rpc.common.RegisterService;
-import blossom.project.rpc.common.RpcServiceInstance;
+import blossom.project.rpc.common.register.RegisterService;
+import blossom.project.rpc.common.register.RpcServiceInstance;
 import blossom.project.rpc.common.loadbalance.LoadBalanceStrategy;
 import blossom.project.rpc.common.loadbalance.PollLoadBalance;
 import com.alibaba.nacos.api.exception.NacosException;

@@ -1,7 +1,7 @@
 package blossom.project.rpc.core.proxy.spring.server;
 
-import blossom.project.rpc.common.RegisterService;
-import blossom.project.rpc.common.RpcServiceInstance;
+import blossom.project.rpc.common.register.RegisterService;
+import blossom.project.rpc.common.register.RpcServiceInstance;
 import blossom.project.rpc.core.proxy.spring.annotation.RpcServiceDeclaration;
 import blossom.project.rpc.core.proxy.spring.rpcmethod.RpcServiceMethod;
 import blossom.project.rpc.core.proxy.spring.rpcmethod.RpcServiceMethodCache;

@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/BlossomRPC.iml" filepath="$PROJECT_DIR$/.idea/BlossomRPC.iml" />
       <module fileurl="file://$PROJECT_DIR$/BlossomRPC-Api/BlossomRPC-Api.iml" filepath="$PROJECT_DIR$/BlossomRPC-Api/BlossomRPC-Api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/BlossomRPC-Register-SPI/BlossomRPC-Api (1).iml" filepath="$PROJECT_DIR$/BlossomRPC-Register-SPI/BlossomRPC-Api (1).iml" />
       <module fileurl="file://$PROJECT_DIR$/BlossomRPC-Client/BlossomRPC-Client.iml" filepath="$PROJECT_DIR$/BlossomRPC-Client/BlossomRPC-Client.iml" />
       <module fileurl="file://$PROJECT_DIR$/BlossomRPC-Common/BlossomRPC-Common.iml" filepath="$PROJECT_DIR$/BlossomRPC-Common/BlossomRPC-Common.iml" />
       <module fileurl="file://$PROJECT_DIR$/BlossomRPC-Core/BlossomRPC-Core.iml" filepath="$PROJECT_DIR$/BlossomRPC-Core/BlossomRPC-Core.iml" />

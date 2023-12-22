@@ -1,11 +1,11 @@
 package blossom.project.rpc.core.netty.codec;
 
+import blossom.project.rpc.common.enums.ReqTypeEnum;
 import blossom.project.rpc.core.constants.RpcCommonConstants;
 import blossom.project.rpc.core.entity.RpcDto;
 import blossom.project.rpc.core.entity.RpcHeader;
 import blossom.project.rpc.core.entity.RpcRequest;
 import blossom.project.rpc.core.entity.RpcResponse;
-import blossom.project.rpc.core.enums.ReqTypeEnum;
 import blossom.project.rpc.core.serialize.Serializer;
 import blossom.project.rpc.core.serialize.SerializerStrategy;
 import io.netty.buffer.ByteBuf;

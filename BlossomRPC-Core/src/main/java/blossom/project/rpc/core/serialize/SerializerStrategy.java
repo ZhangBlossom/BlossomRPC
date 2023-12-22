@@ -1,6 +1,7 @@
 package blossom.project.rpc.core.serialize;
 
-import blossom.project.rpc.core.enums.AlgorithmTypeEnum;
+import blossom.project.rpc.common.enums.AlgorithmTypeEnum;
+
 import java.util.HashMap;
 import java.util.Map;
 

@@ -1,13 +1,11 @@
 package blossom.project.rpc.core.proxy.spring.client;
 
-import blossom.project.rpc.core.enums.LoadBalanceTypeEnum;
-import blossom.project.rpc.core.enums.RegisterTypeEnum;
+import blossom.project.rpc.common.enums.LoadBalanceTypeEnum;
+import blossom.project.rpc.common.enums.RegisterTypeEnum;
+import blossom.project.rpc.common.loadbalance.LoadBalanceFactory;
 import blossom.project.rpc.core.proxy.spring.SpringRpcProperties;
 import blossom.project.rpc.core.register.RegisterFactory;
 import blossom.project.rpc.core.register.RegisterService;
-import blossom.project.rpc.core.register.loadbalance.LoadBalanceFactory;
-import com.alibaba.nacos.shaded.io.grpc.LoadBalancerRegistry;
-import lombok.Data;
 import org.springframework.beans.factory.FactoryBean;
 import org.springframework.beans.factory.InitializingBean;
 

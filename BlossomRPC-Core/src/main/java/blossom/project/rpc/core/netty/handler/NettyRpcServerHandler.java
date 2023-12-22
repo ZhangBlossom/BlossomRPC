@@ -1,11 +1,11 @@
 package blossom.project.rpc.core.netty.handler;
 
 
+import blossom.project.rpc.common.enums.ReqTypeEnum;
 import blossom.project.rpc.core.entity.RpcDto;
 import blossom.project.rpc.core.entity.RpcHeader;
 import blossom.project.rpc.core.entity.RpcRequest;
 import blossom.project.rpc.core.entity.RpcResponse;
-import blossom.project.rpc.core.enums.ReqTypeEnum;
 import blossom.project.rpc.core.proxy.spring.rpcmethod.RpcServiceMethodCache;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;

@@ -42,6 +42,7 @@
     <orderEntry type="library" name="Maven: org.springframework:spring-jcl:5.3.25" level="project" />
     <orderEntry type="library" name="Maven: org.yaml:snakeyaml:1.30" level="project" />
     <orderEntry type="library" name="Maven: cglib:cglib-nodep:3.3.0" level="project" />
+    <orderEntry type="module" module-name="BlossomRPC-Common" />
     <orderEntry type="library" name="Maven: com.alibaba.nacos:nacos-client:2.0.4" level="project" />
     <orderEntry type="library" name="Maven: commons-codec:commons-codec:1.11" level="project" />
     <orderEntry type="library" name="Maven: org.apache.httpcomponents:httpasyncclient:4.1.3" level="project" />

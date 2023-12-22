@@ -5,8 +5,12 @@
     <file url="file://$PROJECT_DIR$/BlossomRPC-Api/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/BlossomRPC-Client/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/BlossomRPC-Client/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/BlossomRPC-Common/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/BlossomRPC-Common/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/BlossomRPC-Core/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/BlossomRPC-Core/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/BlossomRPC-Nacos/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/BlossomRPC-Nacos/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/BlossomRPC-Server/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/BlossomRPC-Server/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/java" charset="UTF-8" />

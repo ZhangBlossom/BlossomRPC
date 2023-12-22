@@ -1,7 +1,7 @@
 package blossom.project.rpc.core.register;
 
-import blossom.project.rpc.core.enums.RegisterTypeEnum;
-import blossom.project.rpc.core.register.loadbalance.LoadBalanceStrategy;
+import blossom.project.rpc.common.enums.RegisterTypeEnum;
+import blossom.project.rpc.common.loadbalance.LoadBalanceStrategy;
 import blossom.project.rpc.core.register.nacos.NacosRegisterService;
 import blossom.project.rpc.core.register.zk.ZookeeperRegisterService;
 

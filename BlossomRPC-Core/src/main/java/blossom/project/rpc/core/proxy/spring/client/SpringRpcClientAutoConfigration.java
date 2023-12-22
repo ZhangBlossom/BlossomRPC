@@ -1,11 +1,7 @@
 package blossom.project.rpc.core.proxy.spring.client;
 
-import blossom.project.rpc.core.enums.RegisterTypeEnum;
 import blossom.project.rpc.core.proxy.spring.SpringRpcProperties;
-import blossom.project.rpc.core.register.RegisterFactory;
-import blossom.project.rpc.core.register.RegisterService;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

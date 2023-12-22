@@ -19,7 +19,6 @@
     <properties>
         <maven.compiler.source>19</maven.compiler.source>
         <maven.compiler.target>19</maven.compiler.target>
-        <snakeyaml.version>1.33</snakeyaml.version>
     </properties>
 
     <dependencies>
@@ -32,31 +31,17 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
             <version>2.7.8</version>
-
         </dependency>
         <dependency>
             <groupId>blossom.project</groupId>
             <artifactId>BlossomRPC-Api</artifactId>
             <version>1.0</version>
         </dependency>
-
-<!--        <dependency>-->
-<!--            <groupId>blossom.project</groupId>-->
-<!--            <artifactId>BlossomRPC-Nacos</artifactId>-->
-<!--            <version>1.0</version>-->
-<!--        </dependency>-->
         <dependency>
-            <groupId>com.alibaba.nacos</groupId>
-            <artifactId>nacos-client</artifactId>
-            <version>2.0.4</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.yaml</groupId>
-                    <artifactId>snakeyaml</artifactId>
-                </exclusion>
-            </exclusions>
+            <groupId>blossom.project</groupId>
+            <artifactId>BlossomRPC-Nacos</artifactId>
+            <version>1.0</version>
         </dependency>
-
     </dependencies>
 
 

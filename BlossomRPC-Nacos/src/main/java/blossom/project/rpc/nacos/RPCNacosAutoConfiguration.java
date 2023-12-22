@@ -4,18 +4,25 @@ import blossom.project.rpc.common.loadbalance.PollLoadBalance;
 import com.alibaba.boot.nacos.discovery.autoconfigure.NacosDiscoveryAutoConfiguration;
 import com.alibaba.boot.nacos.discovery.properties.NacosDiscoveryProperties;
 import com.alibaba.boot.nacos.discovery.properties.Register;
+import com.alibaba.nacos.api.naming.NamingFactory;
 import com.alibaba.nacos.api.naming.NamingService;
 import com.alibaba.nacos.api.utils.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
+import org.springframework.context.EnvironmentAware;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.DependsOn;
+import org.springframework.core.env.Environment;
 
 import java.util.Objects;
 
@@ -30,12 +37,14 @@ import java.util.Objects;
  */
 
 @Configuration
-@ConditionalOnBean(NacosDiscoveryProperties.class)
-public class RPCNacosAutoConfiguration implements ApplicationContextAware {
+@ConditionalOnClass(NamingFactory.class)
+public class RPCNacosAutoConfiguration implements ApplicationContextAware, EnvironmentAware {
 
-    private ApplicationContext applicationContext;
+    private Environment environment;
 
     Logger logger = LoggerFactory.getLogger(RPCNacosAutoConfiguration.class);
+    private ApplicationContext applicationContext;
+
 
     /**
      * 这个bean只会在存在nacos的依赖的时候才会创建
@@ -44,14 +53,12 @@ public class RPCNacosAutoConfiguration implements ApplicationContextAware {
     @Bean
     @ConditionalOnMissingBean
     public NacosRegisterService nacosRegisterService() {
-        NacosDiscoveryProperties nacosDiscoveryProperties = applicationContext.getBean(NacosDiscoveryProperties.class);
-        Register register = nacosDiscoveryProperties.getRegister();
-        if (StringUtils.isBlank(register.getIp())){
-            logger.error("nacos connect info is not be null,please check config on nacos");
+        String serverAddr = environment.getProperty("nacos.discovery.server-addr");
+        if (StringUtils.isBlank(serverAddr)){
+            logger.error("nacos server address could not be null");
         }
-        String nacosAddress = String.format("%s:%s",register.getIp(),register.getPort());
         //
-        NacosRegisterService nacosRegisterService = new NacosRegisterService(nacosAddress,new PollLoadBalance());
+        NacosRegisterService nacosRegisterService = new NacosRegisterService(serverAddr,new PollLoadBalance());
         return nacosRegisterService;
         //        // 获取Nacos相关配置，例如服务器地址等
 //        String serverAddress = "localhost:8848"; // 从配置中读取Nacos服务器地址
@@ -79,5 +86,10 @@ public class RPCNacosAutoConfiguration implements ApplicationContextAware {
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
         this.applicationContext = applicationContext;
+    }
+
+    @Override
+    public void setEnvironment(Environment environment) {
+        this.environment = environment;
     }
 }

@@ -3,7 +3,6 @@ package blossom.project.rpc.core.register.zk;
 import blossom.project.rpc.common.RegisterService;
 import blossom.project.rpc.common.loadbalance.LoadBalanceStrategy;
 import blossom.project.rpc.common.loadbalance.PollLoadBalance;
-import blossom.project.rpc.core.register.nacos.OnNacosClientClassCondition;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Conditional;

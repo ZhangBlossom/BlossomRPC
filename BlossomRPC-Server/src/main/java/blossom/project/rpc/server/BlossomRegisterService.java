@@ -4,9 +4,6 @@ import blossom.project.rpc.common.register.RegisterService;
 import blossom.project.rpc.common.register.RpcServiceInstance;
 import lombok.extern.slf4j.Slf4j;
 
-import java.util.List;
-import java.util.Objects;
-
 /**
  * @author: ZhangBlossom
  * @date: 2023/12/22 20:51
@@ -17,7 +14,7 @@ import java.util.Objects;
  * NacosRegisterServicePlus类
  */
 @Slf4j
-public class NacosRegisterServicePlus implements RegisterService {
+public class BlossomRegisterService implements RegisterService {
 
 
     @Override

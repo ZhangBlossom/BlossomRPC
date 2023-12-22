@@ -14,14 +14,15 @@ import java.util.ServiceLoader;
 public class SpringRpcServerSpiAutoConfiguration {
 
     @Bean
-    public RegisterService registerService() {
+    public RegisterService spiRegisterService() {
         ServiceLoader<RegisterService> serviceLoader =
                 ServiceLoader.load(RegisterService.class);
         for (RegisterService service : serviceLoader) {
-            // 可以添加一些逻辑来选择特定的实现
+            // TODO 添加一些逻辑来选择特定的实现
             return service;
         }
-        throw new IllegalStateException("No RegisterService implementation found");
+        //throw new IllegalStateException("No RegisterService implementation found");
+        return null;
     }
 
     @Bean

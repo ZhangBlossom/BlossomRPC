@@ -1,5 +1,6 @@
 package blossom.project.rpc.core.proxy.spring.client;
 
+import blossom.project.rpc.common.RegisterService;
 import blossom.project.rpc.core.proxy.spring.SpringRpcProperties;
 import blossom.project.rpc.core.proxy.spring.annotation.RpcAutowiredProxy;
 import lombok.extern.slf4j.Slf4j;
@@ -38,8 +39,14 @@ public class SpringRpcAutowiredProxyProcessor implements
     private ClassLoader classLoader;
     private SpringRpcProperties properties;
 
+    private RegisterService registerService;
+
     public SpringRpcAutowiredProxyProcessor(SpringRpcProperties properties) {
         this.properties = properties;
+    }
+    public SpringRpcAutowiredProxyProcessor(SpringRpcProperties properties, RegisterService registerService) {
+        this.properties = properties;
+        this.registerService = registerService;
     }
 
 
@@ -93,6 +100,7 @@ public class SpringRpcAutowiredProxyProcessor implements
                     genericBeanDefinition(SpringRpcClientProxy.class);
             builder.setInitMethodName("generateProxy");
             builder.addPropertyValue("interfaceClass", field.getType());
+            builder.addPropertyValue("registerService", this.registerService);
             builder.addPropertyValue("registerAddress", properties.getRegisterAddress());
             builder.addPropertyValue("registerName", properties.getRegisterName());
             builder.addPropertyValue("loadBalanceStrategy", properties.getLoadBalanceStrategy());

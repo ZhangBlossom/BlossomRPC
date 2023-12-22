@@ -1,16 +1,14 @@
 package blossom.project.rpc.core.proxy.spring.client;
 
+import blossom.project.rpc.common.RegisterService;
 import blossom.project.rpc.common.enums.LoadBalanceTypeEnum;
 import blossom.project.rpc.common.enums.RegisterTypeEnum;
 import blossom.project.rpc.common.loadbalance.LoadBalanceFactory;
 import blossom.project.rpc.core.proxy.spring.SpringRpcProperties;
-import blossom.project.rpc.core.register.RegisterFactory;
-import blossom.project.rpc.core.register.RegisterService;
 import org.springframework.beans.factory.FactoryBean;
 import org.springframework.beans.factory.InitializingBean;
 
 import java.lang.reflect.Proxy;
-import java.util.Objects;
 
 /**
  * @author: ZhangBlossom
@@ -36,6 +34,44 @@ public class SpringRpcClientProxy implements
     private String loadBalanceStrategy;
 
     private SpringRpcProperties clientProperties;
+
+    private RegisterService registerService;
+
+    //特别注意这里不能用@Data注解 会报错
+    @Override
+    public Object getObject() throws Exception {
+        return object;
+    }
+
+    /**
+     * 当前方法用于动态生成代理类
+     * 需要在注入有注解的属性的时候调用这个方法
+     *
+     */
+    public void generateProxy(){
+        //RegisterService registerService= RegisterFactory.createRegisterService(
+        //        clientProperties.getRegisterAddress(),
+        //        RegisterTypeEnum.findByName(clientProperties.getRegisterName()),
+        //        LoadBalanceFactory.getLoadBalanceStrategy(
+        //                LoadBalanceTypeEnum.findByName
+        //                        (this.loadBalanceStrategy)
+        //        ));
+        this.object= Proxy.newProxyInstance(interfaceClass.getClassLoader(),
+                new Class<?>[]{interfaceClass},
+                new JdkRpcProxyInvocationHandler(registerService));
+    }
+
+    @Override
+    public Class<?> getObjectType() {
+        return this.interfaceClass;
+    }
+
+
+    @Override
+    public void afterPropertiesSet() throws Exception {
+        System.out.println(clientProperties);
+    }
+
 
 
     public void setObject(Object object) {
@@ -80,41 +116,6 @@ public class SpringRpcClientProxy implements
 
     public void setClientProperties(SpringRpcProperties clientProperties) {
         this.clientProperties = clientProperties;
-    }
-
-    //特别注意这里不能用@Data注解 会报错
-    @Override
-    public Object getObject() throws Exception {
-        return object;
-    }
-
-    /**
-     * 当前方法用于动态生成代理类
-     * 需要在注入有注解的属性的时候调用这个方法
-     *
-     */
-    public void generateProxy(){
-        RegisterService registryService= RegisterFactory.createRegisterService(
-                clientProperties.getRegisterAddress(),
-                RegisterTypeEnum.findByName(clientProperties.getRegisterName()),
-                LoadBalanceFactory.getLoadBalanceStrategy(
-                        LoadBalanceTypeEnum.findByName
-                                (this.loadBalanceStrategy)
-                ));
-        this.object= Proxy.newProxyInstance(interfaceClass.getClassLoader(),
-                new Class<?>[]{interfaceClass},
-                new JdkRpcProxyInvocationHandler(registryService));
-    }
-
-    @Override
-    public Class<?> getObjectType() {
-        return this.interfaceClass;
-    }
-
-
-    @Override
-    public void afterPropertiesSet() throws Exception {
-        System.out.println(clientProperties);
     }
 
 

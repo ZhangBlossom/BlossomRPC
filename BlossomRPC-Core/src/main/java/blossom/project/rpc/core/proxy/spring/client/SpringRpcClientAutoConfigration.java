@@ -1,5 +1,6 @@
 package blossom.project.rpc.core.proxy.spring.client;
 
+import blossom.project.rpc.common.RegisterService;
 import blossom.project.rpc.core.proxy.spring.SpringRpcProperties;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
@@ -28,11 +29,12 @@ public class SpringRpcClientAutoConfigration
             //@Qualifier(value = "springRpcClientProperties")
             //SpringRpcClientProperties properties
             @Qualifier("springRpcProperties")
-            SpringRpcProperties properties
+            SpringRpcProperties properties,
+            RegisterService registerService
     )
     {
         //创建注册中心
-        return new SpringRpcAutowiredProxyProcessor(properties);
+        return new SpringRpcAutowiredProxyProcessor(properties,registerService);
     }
 
 }

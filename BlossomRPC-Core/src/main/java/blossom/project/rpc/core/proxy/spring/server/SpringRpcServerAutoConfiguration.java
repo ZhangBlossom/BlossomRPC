@@ -1,13 +1,11 @@
 package blossom.project.rpc.core.proxy.spring.server;
 
+import blossom.project.rpc.common.RegisterService;
 import blossom.project.rpc.common.enums.LoadBalanceTypeEnum;
 import blossom.project.rpc.common.enums.RegisterTypeEnum;
 import blossom.project.rpc.common.loadbalance.LoadBalanceFactory;
 import blossom.project.rpc.core.proxy.spring.SpringRpcProperties;
-import blossom.project.rpc.core.register.RegisterFactory;
-import blossom.project.rpc.core.register.RegisterService;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -33,20 +31,21 @@ public class SpringRpcServerAutoConfiguration {
             //@Qualifier(value = "springRpcServerProperties")
             //SpringRpcServerProperties properties
             @Qualifier("springRpcProperties")
-            SpringRpcProperties properties
+            SpringRpcProperties properties,
+            RegisterService registerService
     ) throws UnknownHostException {
         //创建注册中心
-        RegisterService registerService = RegisterFactory
-                .createRegisterService(
-                        properties.getRegisterAddress(),
-                        RegisterTypeEnum.findByName(properties.getRegisterName()),
-                        LoadBalanceFactory
-                                .getLoadBalanceStrategy
-                                        (LoadBalanceTypeEnum.findByName(
-                                                properties.getLoadBalanceStrategy()
-                                                )
-                                        )
-                );
+        //RegisterService registerService = RegisterFactory
+        //        .createRegisterService(
+        //                properties.getRegisterAddress(),
+        //                RegisterTypeEnum.findByName(properties.getRegisterName()),
+        //                LoadBalanceFactory
+        //                        .getLoadBalanceStrategy
+        //                                (LoadBalanceTypeEnum.findByName(
+        //                                        properties.getLoadBalanceStrategy()
+        //                                        )
+        //                                )
+        //        );
         return new SpringRpcServiceDeclarationProcessor
                 (properties.getServicePort(), registerService);
     }

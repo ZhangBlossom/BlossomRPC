@@ -17,6 +17,7 @@
         <module>BlossomRPC-Common</module>
         <module>BlossomRPC-Server</module>
         <module>BlossomRPC-Client</module>
+        <module>BlossomRPC-Zookeeper</module>
     </modules>
     <properties>
         <maven.compiler.source>19</maven.compiler.source>

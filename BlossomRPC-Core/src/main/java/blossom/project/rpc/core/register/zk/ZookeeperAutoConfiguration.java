@@ -1,8 +1,9 @@
-package blossom.project.rpc.core.register.nacos;
+package blossom.project.rpc.core.register.zk;
 
 import blossom.project.rpc.common.RegisterService;
 import blossom.project.rpc.common.loadbalance.LoadBalanceStrategy;
 import blossom.project.rpc.common.loadbalance.PollLoadBalance;
+import blossom.project.rpc.core.register.nacos.OnNacosClientClassCondition;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Conditional;
@@ -10,7 +11,6 @@ import org.springframework.context.annotation.Configuration;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 
 /**
  * @author: ZhangBlossom
@@ -23,8 +23,8 @@ import java.lang.reflect.Method;
  */
 
 @Configuration
-@Conditional(OnNacosClientClassCondition.class)
-public class NacosAutoConfiguration {
+@Conditional(OnZookeeperClientClassCondition.class)
+public class ZookeeperAutoConfiguration {
 
     /**
      * 这个bean只会在存在nacos的依赖的时候才会创建
@@ -32,9 +32,9 @@ public class NacosAutoConfiguration {
      */
     @Bean
     @ConditionalOnMissingBean
-    public RegisterService nacosRegisterService() {
+    public RegisterService zookeeperRegisterService() {
         // 获取Nacos相关配置，例如服务器地址等
-        String serverAddress = "localhost:8848"; // 从配置中读取Nacos服务器地址
+        String serverAddress = "localhost:8848"; // 从配置中读取zk服务器地址
         // ... 其他所需配置
 
         try {
@@ -46,7 +46,7 @@ public class NacosAutoConfiguration {
             //Object namingServiceInstance = createNamingServiceMethod.invoke(null, serverAddress);
 
             // 创建NacosRegisterService实例
-            Class<?> nacosRegisterServiceClass = Class.forName("blossom.project.rpc.nacos.NacosRegisterService");
+            Class<?> nacosRegisterServiceClass = Class.forName("blossom.project.rpc.zookeeper.ZookeeperRegisterService");
             Constructor<?> constructor = nacosRegisterServiceClass.getConstructor(String.class, LoadBalanceStrategy.class);
             return (RegisterService) constructor.newInstance(serverAddress,new PollLoadBalance<>());
         } catch (ClassNotFoundException | NoSuchMethodException | IllegalAccessException | InstantiationException |

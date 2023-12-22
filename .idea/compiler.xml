@@ -8,10 +8,11 @@
         <outputRelativeToContentRoot value="true" />
         <module name="BlossomRPC-Client" />
         <module name="BlossomRPC-Core" />
-        <module name="BlossomRPC-Server" />
         <module name="BlossomRPC-Api" />
         <module name="BlossomRPC-Nacos" />
         <module name="BlossomRPC-Common" />
+        <module name="BlossomRPC-Server" />
+        <module name="BlossomRPC-Zookeeper" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -22,6 +23,7 @@
       <module name="BlossomRPC-Core" target="19" />
       <module name="BlossomRPC-Nacos" target="19" />
       <module name="BlossomRPC-Server" target="19" />
+      <module name="BlossomRPC-Zookeeper" target="19" />
     </bytecodeTargetLevel>
   </component>
 </project>

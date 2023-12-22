@@ -1,6 +1,6 @@
 package blossom.project.rpc.core.proxy.spring.client;
 
-import blossom.project.rpc.core.register.RegisterService;
+import blossom.project.rpc.common.RegisterService;
 
 import java.lang.reflect.Proxy;
 

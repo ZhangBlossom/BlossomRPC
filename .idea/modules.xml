@@ -9,6 +9,7 @@
       <module fileurl="file://$PROJECT_DIR$/BlossomRPC-Core/BlossomRPC-Core.iml" filepath="$PROJECT_DIR$/BlossomRPC-Core/BlossomRPC-Core.iml" />
       <module fileurl="file://$PROJECT_DIR$/BlossomRPC-Nacos/BlossomRPC-Nacos.iml" filepath="$PROJECT_DIR$/BlossomRPC-Nacos/BlossomRPC-Nacos.iml" />
       <module fileurl="file://$PROJECT_DIR$/BlossomRPC-Server/BlossomRPC-Server.iml" filepath="$PROJECT_DIR$/BlossomRPC-Server/BlossomRPC-Server.iml" />
+      <module fileurl="file://$PROJECT_DIR$/BlossomRPC-Zookeeper/BlossomRPC-Zookeeper.iml" filepath="$PROJECT_DIR$/BlossomRPC-Zookeeper/BlossomRPC-Zookeeper.iml" />
     </modules>
   </component>
 </project>

@@ -1,10 +1,10 @@
 package blossom.project.rpc.core.proxy.spring.server;
 
+import blossom.project.rpc.common.RegisterService;
+import blossom.project.rpc.common.RpcServiceInstance;
 import blossom.project.rpc.core.proxy.spring.annotation.RpcServiceDeclaration;
 import blossom.project.rpc.core.proxy.spring.rpcmethod.RpcServiceMethod;
 import blossom.project.rpc.core.proxy.spring.rpcmethod.RpcServiceMethodCache;
-import blossom.project.rpc.core.register.RegisterService;
-import blossom.project.rpc.core.register.RpcServiceInstance;
 import blossom.project.rpc.core.netty.NettyRpcServer;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeansException;

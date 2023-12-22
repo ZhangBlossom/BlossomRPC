@@ -19,7 +19,10 @@ import org.springframework.util.ReflectionUtils;
 
 import java.lang.reflect.Field;
 import java.util.Map;
+import java.util.Objects;
+import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.stream.Stream;
 
 /**
  * @author: ZhangBlossom
@@ -35,23 +38,19 @@ import java.util.concurrent.ConcurrentHashMap;
 @Slf4j
 public class SpringRpcAutowiredProxyProcessor implements
         ApplicationContextAware, BeanClassLoaderAware, BeanFactoryPostProcessor {
+
     private ApplicationContext context;
     private ClassLoader classLoader;
-    private SpringRpcProperties properties;
+    private final SpringRpcProperties properties;
+    private final RegisterService registerService;
 
-    private RegisterService registerService;
+    // 保存代理bean的定义信息
+    private final Map<String, BeanDefinition> rpcBeanDefinitionCache = new ConcurrentHashMap<>();
 
-    public SpringRpcAutowiredProxyProcessor(SpringRpcProperties properties) {
-        this.properties = properties;
-    }
     public SpringRpcAutowiredProxyProcessor(SpringRpcProperties properties, RegisterService registerService) {
         this.properties = properties;
         this.registerService = registerService;
     }
-
-
-    //保存发布的引用bean的信息
-    private final Map<String, BeanDefinition> rpcBeanDefinitionCache = new ConcurrentHashMap<>();
 
     @Override
     public void setBeanClassLoader(ClassLoader classLoader) {
@@ -64,50 +63,52 @@ public class SpringRpcAutowiredProxyProcessor implements
     }
 
     /**
-     * TODO 这个方法需要实现在得到beandefinition之后
-     * 对这个bf进行重新的操作代理 使得得到的是代理对象
-     * @param beanFactory
+     * 在Bean工厂配置阶段处理带有@RpcAutowiredProxy注解的字段。
+     *
+     * @param beanFactory Bean工厂
      * @throws BeansException
      */
     @Override
     public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
-        //TODO 使用stream流优化
-        for (String beanDefinitionname : beanFactory.getBeanDefinitionNames()) {
-            BeanDefinition beanDefinition =
-                    beanFactory.getBeanDefinition(beanDefinitionname);
-            String beanClassName = beanDefinition.getBeanClassName();
-            if (beanClassName != null) {
-                Class<?> clazz = ClassUtils.resolveClassName(beanClassName, this.classLoader);
-                ReflectionUtils.doWithFields(clazz, this::resolveRpcAutowiredProxy);
-            }
-        }
+        Stream.of(beanFactory.getBeanDefinitionNames())
+                .map(beanFactory::getBeanDefinition)
+                .map(BeanDefinition::getBeanClassName)
+                .filter(Objects::nonNull)
+                .map(className -> ClassUtils.resolveClassName(className, this.classLoader))
+                .forEach(clazz -> ReflectionUtils.doWithFields(clazz, this::resolveRpcAutowiredProxy));
+
         BeanDefinitionRegistry registry = (BeanDefinitionRegistry) beanFactory;
-        this.rpcBeanDefinitionCache.forEach((beanName, beanDefinition) -> {
-            if (context.containsBean(beanName)) {
-                log.warn("Spring Context has already contains bean {}", beanName);
-                return;
+        rpcBeanDefinitionCache.forEach((beanName, beanDefinition) -> {
+            if (!context.containsBean(beanName)) {
+                registry.registerBeanDefinition(beanName, beanDefinition);
+                log.info("registe bean {} successfully...", beanName);
+            } else {
+                log.warn("Spring Context has contain bean {}", beanName);
             }
-            registry.registerBeanDefinition(beanName, beanDefinition);
-            log.info("register the beanName:{} successfully...",beanName);
         });
     }
 
+    /**
+     * 处理带有@RpcAutowiredProxy注解的字段，创建相应的代理Bean定义。
+     *
+     * @param field 类字段
+     */
     private void resolveRpcAutowiredProxy(Field field) {
-        RpcAutowiredProxy rpcAutowiredProxy =
-                AnnotationUtils.getAnnotation(field, RpcAutowiredProxy.class);
-        if (rpcAutowiredProxy != null) {
-            BeanDefinitionBuilder builder = BeanDefinitionBuilder.
-                    genericBeanDefinition(SpringRpcClientProxy.class);
-            builder.setInitMethodName("generateProxy");
-            builder.addPropertyValue("interfaceClass", field.getType());
-            builder.addPropertyValue("registerService", this.registerService);
-            builder.addPropertyValue("registerAddress", properties.getRegisterAddress());
-            builder.addPropertyValue("registerName", properties.getRegisterName());
-            builder.addPropertyValue("loadBalanceStrategy", properties.getLoadBalanceStrategy());
-            builder.addPropertyValue("clientProperties", properties);
+        Optional.ofNullable(AnnotationUtils
+                        .getAnnotation(field, RpcAutowiredProxy.class))
+                .ifPresent(rpcAutowiredProxy -> {
+                    BeanDefinitionBuilder builder =
+                            BeanDefinitionBuilder.genericBeanDefinition(SpringRpcClientProxy.class);
+                    builder.setInitMethodName("generateProxy");
+                    builder.addPropertyValue("interfaceClass", field.getType());
+                    builder.addPropertyValue("registerService", this.registerService);
+                    builder.addPropertyValue("registerAddress", properties.getRegisterAddress());
+                    builder.addPropertyValue("registerName", properties.getRegisterName());
+                    builder.addPropertyValue("loadBalanceStrategy", properties.getLoadBalanceStrategy());
+                    builder.addPropertyValue("clientProperties", properties);
 
-            BeanDefinition beanDefinition = builder.getBeanDefinition();
-            rpcBeanDefinitionCache.put(field.getName(), beanDefinition);
-        }
+                    BeanDefinition beanDefinition = builder.getBeanDefinition();
+                    rpcBeanDefinitionCache.put(field.getName(), beanDefinition);
+                });
     }
 }

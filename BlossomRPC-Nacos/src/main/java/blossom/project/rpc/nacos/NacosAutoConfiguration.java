@@ -1,12 +1,14 @@
-package blossom.project.rpc.core.register.nacos;
+package blossom.project.rpc.nacos;
 
-import blossom.project.rpc.common.RegisterService;
 import blossom.project.rpc.common.loadbalance.LoadBalanceStrategy;
 import blossom.project.rpc.common.loadbalance.PollLoadBalance;
+import blossom.project.rpc.common.register.RegisterService;
+import org.springframework.boot.autoconfigure.AutoConfigureOrder;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Conditional;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
@@ -21,8 +23,8 @@ import java.lang.reflect.Method;
  * @github: https://github.com/ZhangBlossom
  * NacosAutoConfiguration类
  */
-
-//@Configuration
+@Configuration
+//@AutoConfigureOrder(value =Integer.MAX_VALUE)
 //@Conditional(OnNacosClientClassCondition.class)
 public class NacosAutoConfiguration {
 
@@ -30,8 +32,8 @@ public class NacosAutoConfiguration {
      * 这个bean只会在存在nacos的依赖的时候才会创建
      * @return
      */
-    @Bean
-    @ConditionalOnMissingBean
+    @Bean(name = "nacosRegisterService")
+    @ConditionalOnMissingBean(value = RegisterService.class)
     public RegisterService nacosRegisterService() {
         // 获取Nacos相关配置，例如服务器地址等
         String serverAddress = "localhost:8848"; // 从配置中读取Nacos服务器地址

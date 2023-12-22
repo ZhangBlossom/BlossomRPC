@@ -1,10 +1,17 @@
 package blossom.project.rpc.core.proxy.spring.client;
 
 import blossom.project.rpc.common.register.RegisterService;
-import blossom.project.rpc.core.proxy.spring.SpringRpcProperties;
-import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.BeansException;
+import org.springframework.boot.autoconfigure.AutoConfigureOrder;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.context.annotation.Primary;
+
+import java.util.ServiceLoader;
 
 /**
  * @author: ZhangBlossom
@@ -16,23 +23,53 @@ import org.springframework.context.annotation.Configuration;
  * SpringRpcClientAutoConfigration类
  */
 @Configuration
+//@AutoConfigureAfter(RegisterService.class)
+@AutoConfigureOrder(Integer.MAX_VALUE)
 //开启配置文件
 //@EnableConfigurationProperties(SpringRpcClientProperties.class)
 public class SpringRpcClientAutoConfigration
+    implements ApplicationContextAware
 {
 
+    private ApplicationContext applicationContext;
+
     @Bean
-    public SpringRpcAutowiredProxyProcessor
+    public Boolean spiCondition() {
+        ServiceLoader<RegisterService> serviceLoader =
+                ServiceLoader.load(RegisterService.class);
+        return serviceLoader.iterator().hasNext();
+    }
+
+    @Primary
+    @Bean(name = "spiRegisterService")
+    @ConditionalOnBean(name = "spiCondition")
+    public RegisterService spiRegisterService() {
+        ServiceLoader<RegisterService> serviceLoader = ServiceLoader.load(RegisterService.class);
+        RegisterService registerService = serviceLoader.iterator().hasNext() ? serviceLoader.iterator().next() : null;
+        return registerService;
+    }
+
+    @Bean
+    @Lazy
+    //public SpringRpcAutowiredProxyProcessor
+    public SpringRpcAutowiredProxyProcessorGentle
     springRpcAutowiredProxyProcessor(
             //@Qualifier(value = "springRpcClientProperties")
             //SpringRpcClientProperties properties
-            @Qualifier("springRpcProperties")
-            SpringRpcProperties properties,
+            //@Qualifier("springRpcProperties")
+            //SpringRpcProperties properties,
             RegisterService registerService
     )
     {
         //创建注册中心
-        return new SpringRpcAutowiredProxyProcessor(properties,registerService);
+        //return new SpringRpcAutowiredProxyProcessor(properties,registerService);
+        return new SpringRpcAutowiredProxyProcessorGentle(registerService);
     }
 
+    @Override
+    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+        this.applicationContext = applicationContext;
+        RegisterService bean = applicationContext.getBean(RegisterService.class);
+        System.out.println(bean);
+    }
 }

@@ -31,8 +31,8 @@ public class RpcClientProxyFactory {
                 new Class<?>[]{interfaceName},
                 new JdkRpcProxyInvocationHandler(host, port));
     }
-
     /**
+
      * 当前方法就是用来返回调用rpc服务的代理对象
      * @param interfaceName 被代理接口名称
      * @param registerService 注册中心

@@ -17,6 +17,8 @@
     <file url="file://$PROJECT_DIR$/BlossomRPC-Server/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/BlossomRPC-Zookeeper/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/BlossomRPC-Zookeeper/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/BlossomRegistry-HeartBeat/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/BlossomRegistry-HeartBeat/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/resources" charset="UTF-8" />
     <file url="PROJECT" charset="UTF-8" />

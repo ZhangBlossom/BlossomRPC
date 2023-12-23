@@ -5,12 +5,13 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>blossom.project</groupId>
-    <artifactId>BlossomRPC</artifactId>
+    <artifactId>BlossomStar</artifactId>
     <version>1.0</version>
     <!-- 确保这里是 "pom" -->
     <packaging>pom</packaging>
 
     <modules>
+        <!--Blossom-RPC RPC系列-->
         <module>BlossomRPC-Api</module>
         <module>BlossomRPC-Core</module>
         <module>BlossomRPC-Nacos</module>
@@ -18,6 +19,9 @@
         <module>BlossomRPC-Server</module>
         <module>BlossomRPC-Client</module>
         <module>BlossomRPC-Zookeeper</module>
+
+        <!--Blossom-Registry 注册中心系列-->
+        <module>BlossomRegistry-HeartBeat</module>
     </modules>
     <properties>
         <maven.compiler.source>19</maven.compiler.source>

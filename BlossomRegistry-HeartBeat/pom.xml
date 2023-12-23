@@ -10,11 +10,9 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>BlossomRPC-Api</artifactId>
+    <artifactId>BlossomRegistry-HeartBeat</artifactId>
     <description>
-        RPC模块，当前模块实现了基于Netty的RPC功能。
-        当前模块是RPC模块的Server端。
-        Server端用于提供服务对外的服务调用的具体实现
+        HeartBeat心跳模块，用于提供给注册中心进行服务的心跳检测
     </description>
     <properties>
         <maven.compiler.source>19</maven.compiler.source>
@@ -22,6 +20,11 @@
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>io.netty</groupId>
+            <artifactId>netty-all</artifactId>
+            <version>4.1.55.Final</version>
+        </dependency>
     </dependencies>
 
 

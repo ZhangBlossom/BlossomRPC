@@ -1,5 +1,6 @@
 package blossom.project.rpc.zookeeper;
 
+import blossom.project.rpc.common.constants.RpcCommonConstants;
 import blossom.project.rpc.common.register.RegisterService;
 import blossom.project.rpc.common.loadbalance.LoadBalanceStrategy;
 import blossom.project.rpc.common.loadbalance.PollLoadBalance;
@@ -45,8 +46,8 @@ public class ZookeeperAutoConfiguration {
             //Object namingServiceInstance = createNamingServiceMethod.invoke(null, serverAddress);
 
             // 创建NacosRegisterService实例
-            Class<?> nacosRegisterServiceClass = Class.forName("blossom.project.rpc.zookeeper.ZookeeperRegisterService");
-            Constructor<?> constructor = nacosRegisterServiceClass.getConstructor(String.class, LoadBalanceStrategy.class);
+            Class<?> zkRegisterServiceClass = Class.forName(RpcCommonConstants.ZK_REGISTER_CLASS);
+            Constructor<?> constructor = zkRegisterServiceClass.getConstructor(String.class, LoadBalanceStrategy.class);
             return (RegisterService) constructor.newInstance(serverAddress,new PollLoadBalance<>());
         } catch (ClassNotFoundException | NoSuchMethodException | IllegalAccessException | InstantiationException |
                  InvocationTargetException e) {

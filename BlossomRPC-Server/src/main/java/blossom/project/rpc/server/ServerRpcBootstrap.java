@@ -4,7 +4,6 @@ import blossom.project.rpc.core.entity.RpcRequest;
 import blossom.project.rpc.core.proxy.spring.server.SpringBeanManager;
 import blossom.project.rpc.core.proxy.spring.server.SpringRpcProxy;
 import blossom.project.rpc.server.service.impl.RpcServiceImpl;
-import com.alibaba.nacos.spring.context.annotation.discovery.EnableNacosDiscovery;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

@@ -5,9 +5,11 @@ import blossom.project.rpc.common.loadbalance.LoadBalanceStrategy;
 import blossom.project.rpc.common.loadbalance.PollLoadBalance;
 import blossom.project.rpc.common.register.RegisterService;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
+import org.springframework.context.EnvironmentAware;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
+import org.springframework.core.env.Environment;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
@@ -24,7 +26,15 @@ import java.util.ServiceLoader;
  * SpringRpcSpiLoader类
  */
 @Configuration
-public class SpringRpcSpiLoader {
+public class SpringRpcSpiLoader implements EnvironmentAware {
+
+    private String registerAddress;
+
+    @Override
+    public void setEnvironment(Environment environment) {
+        String registerAddress = environment.getProperty("blossom.rpc.registerAddress");
+        this.registerAddress = registerAddress;
+    }
 
     @Bean
     public Boolean spiCondition() {
@@ -40,13 +50,20 @@ public class SpringRpcSpiLoader {
         RegisterService registerService = serviceLoader.iterator().hasNext() ? serviceLoader.iterator().next() : null;
         if (Objects.isNull(registerService)) {
             try {
-                String serverAddress = "localhost:8848"; // 从配置中读取Nacos服务器地址
                 Class<?> nacosRegisterServiceClass = Class.forName(RpcCommonConstants.NACOS_REGISTER_CLASS);
                 Constructor<?> constructor = nacosRegisterServiceClass.getConstructor(String.class,
                         LoadBalanceStrategy.class);
-                return (RegisterService) constructor.newInstance(serverAddress, new PollLoadBalance<>());
+                return (RegisterService) constructor.newInstance(registerAddress, new PollLoadBalance<>());
             } catch (Exception e) {
-                throw e;
+                try {
+
+                    Class<?> zkRegisterServiceClass = Class.forName(RpcCommonConstants.ZK_REGISTER_CLASS);
+                    Constructor<?> constructor =
+                            zkRegisterServiceClass.getConstructor(String.class, LoadBalanceStrategy.class);
+                    return (RegisterService) constructor.newInstance(registerAddress, new PollLoadBalance<>());
+                } catch (Exception zkException) {
+                    throw new RuntimeException("You neither implement the RegisterService interface nor use registry dependencies");
+                }
             }
         } else {
             return registerService;

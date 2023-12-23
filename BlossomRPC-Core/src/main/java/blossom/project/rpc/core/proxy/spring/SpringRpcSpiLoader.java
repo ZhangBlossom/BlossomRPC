@@ -25,7 +25,9 @@ import java.util.ServiceLoader;
  * @github: https://github.com/ZhangBlossom
  * SpringRpcSpiLoader类
  */
-@Configuration
+
+//@Configuration
+@Deprecated
 public class SpringRpcSpiLoader implements EnvironmentAware {
 
     private String registerAddress;
@@ -62,7 +64,8 @@ public class SpringRpcSpiLoader implements EnvironmentAware {
                             zkRegisterServiceClass.getConstructor(String.class, LoadBalanceStrategy.class);
                     return (RegisterService) constructor.newInstance(registerAddress, new PollLoadBalance<>());
                 } catch (Exception zkException) {
-                    throw new RuntimeException("You neither implement the RegisterService interface nor use registry dependencies");
+                    throw new RuntimeException("You neither implement the RegisterService interface nor use registry " +
+                            "dependencies");
                 }
             }
         } else {

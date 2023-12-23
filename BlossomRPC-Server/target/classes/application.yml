@@ -1,4 +1,6 @@
-
+blossom:
+  rpc:
+    registerAddress: localhost:8848
 
 server:
   port: 9999

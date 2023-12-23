@@ -3,6 +3,7 @@ package blossom.project.rpc.server;
 import blossom.project.rpc.common.register.RegisterService;
 import blossom.project.rpc.common.register.RpcServiceInstance;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.annotation.Primary;
 
 /**
  * @author: ZhangBlossom
@@ -14,6 +15,7 @@ import lombok.extern.slf4j.Slf4j;
  * NacosRegisterServicePlus类
  */
 @Slf4j
+@Primary
 public class BlossomRegisterService implements RegisterService {
 
 

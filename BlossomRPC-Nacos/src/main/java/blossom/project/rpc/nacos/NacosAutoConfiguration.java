@@ -26,10 +26,10 @@ import java.lang.reflect.Method;
  * @github: https://github.com/ZhangBlossom
  * NacosAutoConfiguration类
  */
-//@Configuration
-@AutoConfiguration
+@Configuration
+//@AutoConfiguration
 //@AutoConfigureBefore(value = RegisterService.class)
-@AutoConfigureOrder(value =Integer.MIN_VALUE)
+@AutoConfigureOrder(value =Integer.MAX_VALUE)
 //@Conditional(OnNacosClientClassCondition.class)
 public class NacosAutoConfiguration {
 
@@ -37,8 +37,9 @@ public class NacosAutoConfiguration {
      * 这个bean只会在存在nacos的依赖的时候才会创建
      * @return
      */
+    @Primary
     @Bean(name = "nacosRegisterService")
-    //@ConditionalOnMissingBean(value = RegisterService.class)
+    @ConditionalOnMissingBean(type = "spiRegisterService")
     public RegisterService nacosRegisterService() {
         // 获取Nacos相关配置，例如服务器地址等
         String serverAddress = "localhost:8848"; // 从配置中读取Nacos服务器地址

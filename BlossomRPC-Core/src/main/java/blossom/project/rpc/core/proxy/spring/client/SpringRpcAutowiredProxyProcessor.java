@@ -64,7 +64,22 @@ public class SpringRpcAutowiredProxyProcessor implements
 
     /**
      * 在Bean工厂配置阶段处理带有@RpcAutowiredProxy注解的字段。
+     *  遍历所有的bean定义。
+     * 对于每个bean定义，使用反射（ReflectionUtils.doWithFields）来访问它的所有字段。
+     * 对每个字段，调用 resolveRpcAutowiredProxy 方法。
+     * ReflectionUtils.doWithFields
+     * ReflectionUtils.doWithFields 是Spring的一个工具方法，
+     * 用于对给定类的所有字段执行某个操作。这个方法接受两个参数：
+     * 一个类和一个 FieldCallback。对于类中的每个字段，都会调用这个FieldCallback。
      *
+     * ReflectionUtils.doWithFields(clazz, this::resolveRpcAutowiredProxy)
+     * 被用来检查每个bean的所有字段，并对每个字段应用
+     * resolveRpcAutowiredProxy 方法。
+     *
+     * resolveRpcAutowiredProxy 方法
+     * 这个方法用来处理具有 @RpcAutowiredProxy 注解的字段。
+     * 对于这些字段，它创建一个新的 SpringRpcClientProxy bean定义，并将其添加到
+     * rpcBeanDefinitionCache（最终注册到Spring容器中）。
      * @param beanFactory Bean工厂
      * @throws BeansException
      */

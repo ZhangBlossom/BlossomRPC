@@ -30,5 +30,5 @@ public interface RpcCommonConstants {
 
     String ZK_DISCOVERY_CLASS = "org.apache.curator.x.discovery.ServiceDiscovery";
     String ZK_REGISTER_CLASS = "blossom.project.rpc.zookeeper.ZookeeperAutoConfiguration";
-
+    String REGISTER_ADDRESS = "blossom.rpc.registerAddress";
 }

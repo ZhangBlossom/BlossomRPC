@@ -11,6 +11,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.context.annotation.Primary;
 
+import java.util.Map;
+import java.util.Objects;
 import java.util.ServiceLoader;
 
 /**
@@ -44,18 +46,39 @@ public class SpringRpcClientAutoConfigration
             //SpringRpcClientProperties properties
             //@Qualifier("springRpcProperties")
             //SpringRpcProperties properties,
-            RegisterService registerService
+            //RegisterService registerService
     )
     {
         //创建注册中心
-        //return new SpringRpcAutowiredProxyProcessor(properties,registerService);
+        Map<String, RegisterService> registerServices = applicationContext.getBeansOfType(RegisterService.class);
+        // 优先检查是否存在 SPI 实现类
+        RegisterService registerService = registerServices.get("spiRegisterService");
+        if (Objects.isNull(registerService)) {
+            // 如果没有找到 SPI 实现类，使用其他实现
+            registerService = registerServices.values().stream()
+                    .findFirst()
+                    .orElseThrow(() -> new IllegalStateException("No RegisterService implementation found"));
+        }
         return new SpringRpcAutowiredProxyProcessorGentle(registerService);
+        //return new SpringRpcAutowiredProxyProcessor(properties,registerService);
     }
 
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
         this.applicationContext = applicationContext;
+        findAllRegisterServices();
         //RegisterService bean = applicationContext.getBean(RegisterService.class);
         //System.out.println(bean);
+    }
+    public void findAllRegisterServices() {
+        // 获取所有RegisterService类型的Bean
+        Map<String, RegisterService> registerServices = applicationContext.getBeansOfType(RegisterService.class);
+
+        for (Map.Entry<String, RegisterService> entry : registerServices.entrySet()) {
+            String beanName = entry.getKey();
+            RegisterService service = entry.getValue();
+            // 处理每个RegisterService实例
+            System.out.println("Bean Name: " + beanName + ", Service: " + service);
+        }
     }
 }

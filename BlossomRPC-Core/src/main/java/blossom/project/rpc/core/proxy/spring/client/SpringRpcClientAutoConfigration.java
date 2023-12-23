@@ -33,21 +33,7 @@ public class SpringRpcClientAutoConfigration
 
     private ApplicationContext applicationContext;
 
-    @Bean
-    public Boolean spiCondition() {
-        ServiceLoader<RegisterService> serviceLoader =
-                ServiceLoader.load(RegisterService.class);
-        return serviceLoader.iterator().hasNext();
-    }
 
-    @Primary
-    @Bean(name = "spiRegisterService")
-    @ConditionalOnBean(name = "spiCondition")
-    public RegisterService spiRegisterService() {
-        ServiceLoader<RegisterService> serviceLoader = ServiceLoader.load(RegisterService.class);
-        RegisterService registerService = serviceLoader.iterator().hasNext() ? serviceLoader.iterator().next() : null;
-        return registerService;
-    }
 
     @Bean
     @Lazy
@@ -69,7 +55,7 @@ public class SpringRpcClientAutoConfigration
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
         this.applicationContext = applicationContext;
-        RegisterService bean = applicationContext.getBean(RegisterService.class);
-        System.out.println(bean);
+        //RegisterService bean = applicationContext.getBean(RegisterService.class);
+        //System.out.println(bean);
     }
 }

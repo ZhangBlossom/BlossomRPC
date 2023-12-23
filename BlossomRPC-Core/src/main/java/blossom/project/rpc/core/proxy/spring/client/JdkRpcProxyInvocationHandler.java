@@ -1,9 +1,9 @@
 package blossom.project.rpc.core.proxy.spring.client;
 
+import blossom.project.rpc.common.constants.RpcCommonConstants;
 import blossom.project.rpc.common.register.RegisterService;
 import blossom.project.rpc.common.enums.AlgorithmTypeEnum;
 import blossom.project.rpc.common.enums.ReqTypeEnum;
-import blossom.project.rpc.core.constants.RpcCommonConstants;
 import blossom.project.rpc.core.entity.*;
 import blossom.project.rpc.core.netty.NettyRpcClient;
 import io.netty.channel.DefaultEventLoop;

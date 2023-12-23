@@ -1,7 +1,7 @@
 package blossom.project.rpc.core.netty.codec;
 
+import blossom.project.rpc.common.constants.RpcCommonConstants;
 import blossom.project.rpc.common.enums.ReqTypeEnum;
-import blossom.project.rpc.core.constants.RpcCommonConstants;
 import blossom.project.rpc.core.entity.RpcDto;
 import blossom.project.rpc.core.entity.RpcHeader;
 import blossom.project.rpc.core.entity.RpcRequest;

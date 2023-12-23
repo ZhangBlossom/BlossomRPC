@@ -23,4 +23,12 @@ public interface RpcCommonConstants {
      * nacos默认名称中心
      */
     String namespace = "public";
+
+    String NACOS_NAMING_CLASS = "com.alibaba.nacos.api.naming.NamingFactory";
+    String NACOS_REGISTER_CLASS = "blossom.project.rpc.nacos.NacosRegisterService";
+
+
+    String ZK_DISCOVERY_CLASS = "org.apache.curator.x.discovery.ServiceDiscovery";
+    String ZK_REGISTER_CLASS = "blossom.project.rpc.zookeeper.ZookeeperAutoConfiguration";
+
 }

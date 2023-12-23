@@ -1,8 +1,8 @@
 package blossom.project.rpc.core.netty.handler;
 
+import blossom.project.rpc.common.constants.RpcCommonConstants;
 import blossom.project.rpc.core.netty.codec.RpcDecode;
 import blossom.project.rpc.core.netty.codec.RpcEncode;
-import blossom.project.rpc.core.constants.RpcCommonConstants;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.handler.codec.LengthFieldBasedFrameDecoder;

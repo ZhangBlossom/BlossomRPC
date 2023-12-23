@@ -4,6 +4,8 @@ import org.springframework.context.annotation.Condition;
 import org.springframework.context.annotation.ConditionContext;
 import org.springframework.core.type.AnnotatedTypeMetadata;
 
+import static blossom.project.rpc.common.constants.RpcCommonConstants.ZK_DISCOVERY_CLASS;
+
 
 /**
  * @author: ZhangBlossom
@@ -17,7 +19,6 @@ import org.springframework.core.type.AnnotatedTypeMetadata;
 
 public class OnZookeeperClientClassCondition implements Condition {
 
-    private static final String ZK_DISCOVERY_CLASS = "org.apache.curator.x.discovery.ServiceDiscovery";
 
     @Override
     public boolean matches(ConditionContext context, AnnotatedTypeMetadata metadata) {

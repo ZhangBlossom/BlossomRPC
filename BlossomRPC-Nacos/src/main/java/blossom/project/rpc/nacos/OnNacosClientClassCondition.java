@@ -4,6 +4,7 @@ import org.springframework.context.annotation.Condition;
 import org.springframework.context.annotation.ConditionContext;
 import org.springframework.core.type.AnnotatedTypeMetadata;
 
+import static blossom.project.rpc.common.constants.RpcCommonConstants.NACOS_NAMING_CLASS;
 
 
 /**
@@ -21,7 +22,6 @@ public class OnNacosClientClassCondition implements Condition {
     /**
      * 存在有nacos的namingservice的时候才会使用nacos
      */
-    private static final String NACOS_NAMING_CLASS = "com.alibaba.nacos.api.naming.NamingFactory";
 
     @Override
     public boolean matches(ConditionContext context, AnnotatedTypeMetadata metadata) {

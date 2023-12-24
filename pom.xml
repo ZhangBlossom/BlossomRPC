@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>blossom.project</groupId>
-    <artifactId>BlossomStar</artifactId>
+    <artifactId>BlossomRPC</artifactId>
     <version>1.0</version>
     <!-- 确保这里是 "pom" -->
     <packaging>pom</packaging>
@@ -19,9 +19,6 @@
         <module>BlossomRPC-Server</module>
         <module>BlossomRPC-Client</module>
         <module>BlossomRPC-Zookeeper</module>
-
-        <!--Blossom-Registry 注册中心系列-->
-        <module>BlossomRegistry-HeartBeat</module>
     </modules>
     <properties>
         <maven.compiler.source>19</maven.compiler.source>

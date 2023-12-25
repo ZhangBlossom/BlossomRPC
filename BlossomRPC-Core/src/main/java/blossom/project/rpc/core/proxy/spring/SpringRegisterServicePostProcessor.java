@@ -69,6 +69,7 @@ public class SpringRegisterServicePostProcessor implements
                     BeanDefinitionBuilder.genericBeanDefinition(registerServiceClass)
                     .getBeanDefinition();
             registry.registerBeanDefinition(className, beanDefinition);
+            System.out.println(registry.getBeanDefinition(className));
         } catch (Exception e) {
             throw new RuntimeException("Failed to register " + className, e);
         }

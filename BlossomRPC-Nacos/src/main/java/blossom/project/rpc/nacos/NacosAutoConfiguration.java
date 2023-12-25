@@ -51,13 +51,7 @@ public class NacosAutoConfiguration implements ApplicationContextAware, Environm
     public RegisterService nacosRegisterService() {
 
         //创建注册中心
-        Map<String, RegisterService> registerServices = applicationContext.getBeansOfType(RegisterService.class);
         // 优先检查是否存在 SPI 实现类
-        RegisterService registerService = registerServices.get("spiRegisterService");
-        if (Objects.nonNull(registerService)) {
-            return null;
-        }
-        System.out.println(registerService);
         // 获取Nacos相关配置，例如服务器地址等
         //String serverAddress = "localhost:8848"; // 从配置中读取Nacos服务器地址
         // ... 其他所需配置

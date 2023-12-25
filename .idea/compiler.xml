@@ -11,12 +11,12 @@
         <module name="BlossomRPC-Nacos" />
         <module name="BlossomRPC-Api" />
         <module name="BlossomRPC-Common" />
-        <module name="BlossomRegistry-HeartBeat" />
         <module name="BlossomRPC-Server" />
         <module name="BlossomRPC-Zookeeper" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="BlossomRegistry-HeartBeat" target="1.8" />
       <module name="BlossomRPC-Api (1)" target="19" />
     </bytecodeTargetLevel>
   </component>

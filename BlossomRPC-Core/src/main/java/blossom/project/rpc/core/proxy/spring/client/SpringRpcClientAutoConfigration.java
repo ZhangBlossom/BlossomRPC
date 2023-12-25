@@ -1,7 +1,9 @@
 package blossom.project.rpc.core.proxy.spring.client;
 
 import blossom.project.rpc.common.register.RegisterService;
+import blossom.project.rpc.core.proxy.spring.SpringRpcProperties;
 import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.AutoConfigureOrder;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.context.ApplicationContext;
@@ -39,13 +41,13 @@ public class SpringRpcClientAutoConfigration
 
     @Bean
     @Lazy
-    //public SpringRpcAutowiredProxyProcessor
-    public SpringRpcAutowiredProxyProcessorGentle
+    public SpringRpcAutowiredProxyProcessor
+    //public SpringRpcAutowiredProxyProcessorGentle
     springRpcAutowiredProxyProcessor(
             //@Qualifier(value = "springRpcClientProperties")
             //SpringRpcClientProperties properties
-            //@Qualifier("springRpcProperties")
-            //SpringRpcProperties properties,
+            @Qualifier("springRpcProperties")
+            SpringRpcProperties properties
             //RegisterService registerService
     )
     {
@@ -59,8 +61,8 @@ public class SpringRpcClientAutoConfigration
                     .findFirst()
                     .orElseThrow(() -> new IllegalStateException("No RegisterService implementation found"));
         }
-        return new SpringRpcAutowiredProxyProcessorGentle(registerService);
-        //return new SpringRpcAutowiredProxyProcessor(properties,registerService);
+        //return new SpringRpcAutowiredProxyProcessorGentle(registerService);
+        return new SpringRpcAutowiredProxyProcessor(properties,registerService);
     }
 
     @Override

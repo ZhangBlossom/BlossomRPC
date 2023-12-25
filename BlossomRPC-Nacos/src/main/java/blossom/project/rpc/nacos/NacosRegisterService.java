@@ -30,6 +30,7 @@ public class NacosRegisterService implements RegisterService {
     private LoadBalanceStrategy<Instance> loadBalanceStrategy
              = new PollLoadBalance<>();
 
+    public NacosRegisterService(){}
 
     public NacosRegisterService(String serverAddress) {
         try {

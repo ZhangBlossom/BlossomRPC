@@ -3,7 +3,9 @@ package blossom.project.rpc.client.controller;
 import blossom.project.rpc.api.TestService;
 import blossom.project.rpc.core.proxy.spring.annotation.RpcAutowiredProxy;
 import blossom.project.rpc.core.service.RpcService;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -15,16 +17,12 @@ import org.springframework.web.bind.annotation.RestController;
  * @github: https://github.com/ZhangBlossom
  * BlossomRpcController类
  */
-@RestController
+@Controller(value = "blossomRpcController")
+@ResponseBody
 public class BlossomRpcController {
 
     //TODO 应该扫描所有有这个注解的属性
     //并且进行动态代理
-
-    @RpcAutowiredProxy
-    private RpcService rpcService;
-
-
     @RpcAutowiredProxy
     private TestService testService;
 

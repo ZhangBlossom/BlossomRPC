@@ -85,7 +85,6 @@ public class NettyRpcClient {
             // 可以检查操作是否成功，如果操作失败，可以获取到失败的原因。
             //TODO 构思一下对ChannelFuture的处理
             ChannelFuture sendFuture = future.channel().writeAndFlush(requestRpcDto);
-
             // 添加监听器处理writeAndFlush的结果
             // 1：添加监听器异步等待
             //sendFuture.addListener(new ChannelFutureListener() {

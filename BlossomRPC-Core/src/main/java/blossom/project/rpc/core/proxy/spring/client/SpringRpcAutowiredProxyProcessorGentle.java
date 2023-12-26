@@ -4,11 +4,13 @@ import blossom.project.rpc.common.register.RegisterService;
 import blossom.project.rpc.core.proxy.spring.SpringRpcProperties;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.aop.framework.ProxyFactory;
 import org.aopalliance.intercept.MethodInterceptor;
+import org.springframework.stereotype.Component;
 import org.springframework.util.ReflectionUtils;
 
 import blossom.project.rpc.core.proxy.spring.annotation.RpcAutowiredProxy;
@@ -28,6 +30,9 @@ import java.lang.reflect.Field;
 public class SpringRpcAutowiredProxyProcessorGentle
         implements BeanPostProcessor {
 
+    @Autowired
+    private ApplicationContext applicationContext;
+
     private final RegisterService registerService;
 
     public SpringRpcAutowiredProxyProcessorGentle(RegisterService registerService) {
@@ -39,7 +44,9 @@ public class SpringRpcAutowiredProxyProcessorGentle
      * 在bean初始化之前执行的操作，用于处理RpcAutowiredProxy注解。
      */
     @Override
-    public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
+    public Object postProcessBeforeInitialization(Object bean, String beanName)
+            throws BeansException {
+
         // 遍历Bean的所有字段，查找RpcAutowiredProxy注解
         ReflectionUtils.doWithFields(bean.getClass(), field -> {
             RpcAutowiredProxy rpcAutowiredProxy = field.getAnnotation(RpcAutowiredProxy.class);

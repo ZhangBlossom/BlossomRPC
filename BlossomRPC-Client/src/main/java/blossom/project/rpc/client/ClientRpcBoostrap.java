@@ -20,11 +20,7 @@ import java.util.Objects;
  * ClientRpcBoostrap类
  * client端的启动类
  */
-@SpringBootApplication(scanBasePackages = {
-        "blossom.project.rpc"
-        //"blossom.project.rpc.core.proxy.spring",
-        //"blossom.project.rpc.client.controller"
-})
+@SpringBootApplication(scanBasePackages = "blossom.project")
 @Slf4j
 public class ClientRpcBoostrap {
     public static void main(String[] args) {
@@ -40,7 +36,5 @@ public class ClientRpcBoostrap {
             log.error("the controller does not be load");
             System.exit(-1);
         }
-        RpcService bean = context.getBean(RpcService.class);
-        System.out.println(bean);
     }
 }

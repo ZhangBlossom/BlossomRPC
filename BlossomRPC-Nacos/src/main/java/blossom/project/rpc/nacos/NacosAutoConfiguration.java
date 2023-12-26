@@ -38,7 +38,8 @@ import java.util.Objects;
 //@AutoConfigureBefore(value = RegisterService.class)
 @AutoConfigureOrder(value = Integer.MAX_VALUE)
 //@Conditional(OnNacosClientClassCondition.class)
-public class NacosAutoConfiguration implements ApplicationContextAware, EnvironmentAware {
+public class NacosAutoConfiguration implements
+        ApplicationContextAware, EnvironmentAware {
 
     /**
      * 这个bean只会在存在nacos的依赖的时候才会创建

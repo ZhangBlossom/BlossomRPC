@@ -12,6 +12,9 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 
 /**
  * @author: ZhangBlossom
@@ -62,7 +65,7 @@ public class JdkRpcProxyInvocationHandler implements InvocationHandler {
      * @throws Throwable
      */
     @Override
-    public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+    public Object invoke(Object proxy, Method method, Object[] args) {
         log.info("client start to invoke the server' function!!!");
 
         RpcDto<RpcRequest> dto=new RpcDto<>();
@@ -90,7 +93,19 @@ public class JdkRpcProxyInvocationHandler implements InvocationHandler {
         RpcCache.RESPONSE_CACHE.put(reqId,promise);
         nettyClient.doRequest(dto,registerService);
         //TODO 方便debug time：2023/12/16 01：14
-        Object data = promise.get().getData();
+        Object data = null;
+        try {
+            data = promise.get(5, TimeUnit.SECONDS).getData();
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        } catch (ExecutionException e) {
+            throw new RuntimeException(e);
+        } catch (TimeoutException e) {
+            throw new RuntimeException(e);
+        }finally {
+            //如果报错，强制删除
+            RpcCache.RESPONSE_CACHE.remove(reqId);
+        }
         return data;
     }
 }

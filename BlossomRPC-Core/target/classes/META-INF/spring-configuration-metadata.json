@@ -1,0 +1,16 @@
+{
+  "groups": [
+    {
+      "name": "com.example.my",
+      "type": "com.example.MyProperties",
+      "sourceType": "com.example.MyProperties"
+    }
+  ],
+  "properties": [
+    {
+      "name": "com.example.my.property",
+      "type": "java.lang.String",
+      "description": "A description for 'my.property'."
+    }
+  ]
+}

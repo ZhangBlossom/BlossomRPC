@@ -11,6 +11,7 @@
         <module name="BlossomRPC-Nacos" />
         <module name="BlossomRPC-Api" />
         <module name="BlossomRPC-Common" />
+        <module name="BlossomRPC-Netty" />
         <module name="BlossomRPC-Server" />
         <module name="BlossomRPC-Zookeeper" />
       </profile>

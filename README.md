@@ -11,7 +11,11 @@ RPC项目文档可加入我的知识星球获取。
 
 ![image](https://github.com/ZhangBlossom/BlossomGateway/assets/110703773/fa887a8e-4cb6-450a-9626-34bc3597fd39)
 
-添加微信，加入我的知识星球，一起完善它
+添加微信，加入我的知识星球，目前已有近200人
+
+
+![image](https://github.com/ZhangBlossom/BlossomRPC/assets/110703773/086666f4-f641-4e43-bcbf-0021d6442a44)
+
 
 ![QQ截图20240209121942](https://github.com/ZhangBlossom/BlossomRPC/assets/110703773/4d17ad93-3163-475b-95a1-ec36b0b15acc)
 

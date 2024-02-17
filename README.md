@@ -17,7 +17,8 @@ RPC项目文档可加入我的知识星球获取。
 ![image](https://github.com/ZhangBlossom/BlossomRPC/assets/110703773/086666f4-f641-4e43-bcbf-0021d6442a44)
 
 
-![QQ截图20240209121942](https://github.com/ZhangBlossom/BlossomRPC/assets/110703773/4d17ad93-3163-475b-95a1-ec36b0b15acc)
+![image](https://github.com/ZhangBlossom/BlossomRPC/assets/110703773/349ddbf4-091f-43a5-a06f-183052bfcf54)
+
 
 
 

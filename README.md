@@ -7,6 +7,11 @@ BlossomRPC，基于Netty，Nacos实现的RPC框架。
 
 学习当前项目能帮助你了解大厂的开发规范以及Netty的高级用法。从而帮助你深入了解Netty以及Nacos。
 
+文档目录如下：
+
+<img width="275" alt="image" src="https://github.com/ZhangBlossom/BlossomRPC/assets/110703773/fa565f4c-99c1-46a9-b4c3-15456e4c9731">
+
+
 配置中心项目：https://github.com/ZhangBlossom/BlossomConfig
 
 网关项目：https://github.com/ZhangBlossom/BlossomGateway
@@ -33,11 +38,24 @@ show一下我们的工牌
 
 如果有意向加入星球可以联系我们哦。目前星球已有200+人。
 
-星球内容会不断继续完善更新，目前星球内容已达62w字。希望能早日到达内容100w字！    
+星球内容会不断继续完善更新，目前星球内容已达66w字。希望能早日到达内容100w字！    
+
+🌍目录如下：
+
+![image](https://github.com/ZhangBlossom/BlossomRPC/assets/110703773/382462ee-11b2-475f-88eb-b6f955cdeb1f)
+
+🌍价格：
+
+一周19  三个月59  半年99  一年159  两年259  永久299
+
+也非常感谢朋友在我emo时候的支持，知足常乐！
+
+<img width="636" alt="image" src="https://github.com/ZhangBlossom/BlossomRPC/assets/110703773/bd1dc493-f940-4dca-a11f-81a0b3bb7e19">
+
 
 ![image](https://github.com/ZhangBlossom/BlossomGateway/assets/110703773/fbd12c89-ca55-4efc-b8b7-c6c0dd0061ac)
 
-![image](https://github.com/ZhangBlossom/BlossomGateway/assets/110703773/f668c96d-3222-47e0-883c-2f88cf51d9af)
+![image](https://github.com/ZhangBlossom/BlossomRPC/assets/110703773/52fb9c42-f1eb-42f1-a026-9bfc3cfa51b0)
 
 ![image](https://github.com/ZhangBlossom/BlossomGateway/assets/110703773/61c9cfb1-f6fb-4dc1-8d2d-e39ac7546470)
 
